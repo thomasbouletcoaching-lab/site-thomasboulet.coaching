@@ -123,11 +123,14 @@ p{margin:0 0 1em}
 /* Différences : liste à deux colonnes "eux / moi" */
 .difference{display:grid;gap:0;border-top:1px solid var(--trait)}
 .difference .ligne{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:24px;padding:24px 0;border-bottom:1px solid var(--trait)}
-.difference .eux{color:var(--gris);font-size:1.02rem}
+.difference .eux{color:var(--gris);font-size:1.02rem;font-style:italic}
 .difference .eux s{text-decoration-color:rgba(86,98,122,.5)}
 .difference .moi h3{margin-bottom:6px}
 .difference .moi p{margin:0;color:var(--gris)}
 .difference .entete{font-family:var(--titre);font-weight:600;font-size:1.1rem;color:var(--gris);padding:12px 0;border-bottom:1px solid var(--trait)}
+.difference .tag-eux,.difference .tag-moi{display:block;font-family:var(--titre);font-weight:700;font-size:.74rem;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px}
+.difference .tag-eux{color:var(--ko)}
+.difference .tag-moi{color:var(--bleu-fonce)}
 @media (max-width:700px){.difference .ligne{grid-template-columns:1fr;gap:8px}.difference .entete{display:none}}
 
 /* Poutres de la méthode */
