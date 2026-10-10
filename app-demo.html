@@ -7,119 +7,143 @@
 <meta name="description" content="Essayez en direct l'application TB my Coach : carnet d'entraînement, suivi alimentaire, mesures et messagerie avec le coach. Démo interactive, données fictives.">
 <link rel="canonical" href="https://thomasbouletcoaching-lab.github.io/thomasboulet-coaching/app-demo.html">
 <meta name="robots" content="noindex">
-<meta name="theme-color" content="#0F1216">
+<meta name="theme-color" content="#EEF1F6">
 <link rel="icon" href="favicon.ico">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
-  --chalk:#EEF1F4; --paper:#FFFFFF; --ink:#18212C; --soft:#5B6673; --line:#D7DDE3;
-  --blue:#1F4FB5; --yellow:#E9AE00; --red:#C8202B; --green:#1E8F4E; --steel:#8A96A3;
-  --input:#FFF7D6; --good:#D9F2E3; --warn:#FFF0C2;
-  --r:12px; --font:"Barlow",system-ui,-apple-system,"Segoe UI",sans-serif;
-  --cond:"Barlow Condensed","Arial Narrow",system-ui,sans-serif;
+  --chalk:#EEF1F6; --paper:#FFFFFF; --ink:#111114; --soft:#5B5B66; --line:rgba(17,17,20,.10);
+  --accent:#0062E0; --on-accent:#FFFFFF;
+  --glass:rgba(255,255,255,.62); --glass-b:rgba(255,255,255,.85); --glass-bar:rgba(255,255,255,.72); --input:rgba(255,255,255,.88);
+  --shadow:0 8px 30px rgba(17,17,20,.06); --blob1:#93C5FD; --blob2:#A7F3D0; --blobo:.42; --r:20px;
+  --grad:linear-gradient(110deg,#FF6FB5 0%,#8B7CFF 30%,#4C9BFF 60%,#3FD2B5 85%,#FF6FB5 100%);
+  --gradbtn:linear-gradient(110deg,#2F6BF0 0%,#3D8AF2 35%,#1FB5A3 65%,#2F6BF0 100%);
+  --mint:#3FD2B5; --red:#C8202B;
+  --font:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
 }
 *,*::before,*::after{box-sizing:border-box}
 html,body{margin:0;background:#0F1216;color:var(--ink);font-family:var(--font);-webkit-text-size-adjust:100%}
+@keyframes shift{0%{background-position:0% 50%}100%{background-position:200% 50%}}
 
 /* ---------- page autour du téléphone ---------- */
 .wrap{max-width:720px;margin:0 auto;padding:28px 20px 64px}
 .retour{display:inline-block;color:#C7CDD4;text-decoration:none;font-size:.9rem;margin-bottom:18px}
 .retour:hover{color:#fff}
 .intro{color:#EDEFF2;text-align:center}
-.intro .kicker{font-family:var(--cond);text-transform:uppercase;letter-spacing:.08em;font-size:.8rem;color:var(--yellow);margin:0 0 6px}
-.intro h1{font-family:var(--cond);font-weight:700;font-size:1.6rem;line-height:1.15;margin:0 0 10px}
+.intro .kicker{text-transform:uppercase;letter-spacing:.08em;font-size:.8rem;font-weight:700;color:#3FD2B5;margin:0 0 6px}
+.intro h1{font-weight:800;font-size:1.6rem;line-height:1.15;margin:0 0 10px;letter-spacing:-.01em}
 .intro p{font-size:.96rem;line-height:1.5;color:#C7CDD4;max-width:560px;margin:0 auto}
 .intro .note{font-size:.8rem;color:#8A96A3;max-width:560px;margin:16px auto 0}
 
 /* ---------- cadre téléphone ---------- */
 .phone{width:380px;max-width:100%;margin:28px auto 0;padding:7px;background:#000;border-radius:40px;box-shadow:0 30px 70px rgba(0,0,0,.45)}
-.phone-screen{position:relative;height:740px;border-radius:33px;overflow:hidden;background:var(--chalk);display:flex;flex-direction:column;font-size:16px}
+.tag{text-align:center;padding:7px 0 8px;font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#fff;background:#1B1B1B}
+.phone-screen{position:relative;height:720px;border-radius:0 0 33px 33px;overflow:hidden;background:var(--chalk);display:flex;flex-direction:column;font-size:16px}
 
-header.top{position:relative;z-index:5;background:var(--ink);color:var(--paper);padding:14px 14px 10px;flex:0 0 auto}
-header.top h1{font-family:var(--cond);font-weight:700;font-size:1.3rem;letter-spacing:.01em;margin:0;line-height:1.1}
-header.top .sub{font-size:.76rem;opacity:.75;margin-top:2px}
-.role{float:right;font-family:var(--cond);font-size:.78rem;border-radius:999px;padding:3px 10px;background:var(--yellow);color:#1B1B1B;font-weight:700}
+#bg{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+#bg i{position:absolute;border-radius:50%;filter:blur(60px);opacity:var(--blobo)}
+#bg i:first-child{width:220px;height:220px;background:var(--blob1);top:-60px;right:-70px}
+#bg i:last-child{width:190px;height:190px;background:var(--blob2);top:300px;left:-90px;opacity:.48}
 
-.phone-content{flex:1 1 auto;overflow-y:auto;padding:12px 12px 90px;-webkit-overflow-scrolling:touch}
+header.top{position:relative;z-index:5;background:color-mix(in srgb,var(--chalk) 70%,transparent);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--line);padding:10px 14px 8px;flex:0 0 auto}
+header.top h1{display:flex;align-items:center;gap:8px;font-weight:800;font-size:1.2rem;letter-spacing:-.01em;margin:0}
+header.top h1 img{width:36px;height:36px;border-radius:9px;flex:0 0 36px}
+header.top .sub{font-size:.78rem;color:var(--soft);margin-top:2px}
+.phone-screen.tdy header.top{display:none}
+
+.phone-content{position:relative;z-index:1;flex:1 1 auto;overflow-y:auto;padding:0 0 90px;-webkit-overflow-scrolling:touch}
 .view{display:none}
 .view.on{display:block}
+main.pad{padding:0 14px}
 
-h2{font-family:var(--cond);font-weight:700;font-size:1.2rem;margin:4px 2px 8px}
-h3{font-family:var(--cond);font-weight:600;font-size:1.02rem;margin:10px 0 6px}
-.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:12px;margin:10px 0}
+h2{font-weight:800;font-size:1.35rem;letter-spacing:-.02em;margin:16px 2px 10px}
+h3{font-weight:700;font-size:1.02rem;letter-spacing:-.01em;margin:0 0 6px}
+.card{position:relative;background:var(--glass);-webkit-backdrop-filter:blur(24px);backdrop-filter:blur(24px);border:1px solid var(--glass-b);box-shadow:var(--shadow);border-radius:var(--r);padding:16px;margin:12px 0}
 .muted{color:var(--soft);font-size:.85rem}
+.eyebrow{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--soft);margin:0 0 2px}
 .small{font-size:.78rem}
 .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 
-button{font:inherit;font-family:var(--cond);font-weight:600;font-size:.95rem;border:0;border-radius:10px;padding:9px 13px;background:var(--ink);color:var(--paper);cursor:pointer}
-button.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
-button.ok{background:var(--green);color:#fff}
-button.sm{padding:6px 10px;font-size:.85rem}
+button{font:inherit;font-family:var(--font);font-weight:700;font-size:.95rem;border:0;border-radius:12px;padding:10px 14px;background:var(--accent);color:var(--on-accent);cursor:pointer}
+button.ghost{background:var(--input);color:var(--accent);border:1px solid var(--line)}
+button.ok{background:var(--mint);color:#fff}
+button.danger{background:transparent;color:var(--red);border:1px solid rgba(200,32,43,.3)}
+button.sm{padding:7px 11px;font-size:.85rem;border-radius:10px}
+button.big{height:52px;border-radius:14px;font-size:1rem;width:100%;background:var(--gradbtn);background-size:200% 100%;animation:shift 10s linear infinite}
 button:disabled{opacity:.45;cursor:default}
 
-.weeks{display:flex;gap:6px;overflow-x:auto;padding:4px 2px 10px;scroll-snap-type:x proximity}
-.wk{flex:0 0 auto;min-width:44px;text-align:center;border-radius:10px;border:2px solid var(--line);background:var(--paper);padding:5px 6px 4px;font-family:var(--cond);color:var(--ink)}
-.wk b{display:block;font-size:1rem;line-height:1}
-.wk span{font-size:.64rem;color:var(--soft)}
-.wk.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
-.wk.on span{color:var(--paper);opacity:.8}
+.chip{display:inline-block;font-size:.76rem;font-weight:600;border-radius:999px;padding:4px 11px;background:var(--input);border:1px solid var(--line);margin:2px 4px 2px 0;color:var(--ink)}
+.chip.on{background:var(--accent);color:#fff;border-color:var(--accent)}
 
-.kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
-.kpi{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:8px}
-.kpi b{display:block;font-family:var(--cond);font-size:1.4rem;line-height:1.1}
-.kpi span{font-size:.7rem;color:var(--soft)}
+/* hero Accueil */
+.hero{display:flex;align-items:flex-end;gap:12px;padding:16px 14px 2px}
+.hero .grow{min-width:0}
+.hero h2{margin:4px 0 0;font-size:30px;line-height:1.1;font-weight:800;letter-spacing:-.02em;overflow-wrap:anywhere}
+.avatar{flex:0 0 44px;width:44px;height:44px;border-radius:22px;background:var(--glass);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);border:1px solid var(--glass-b);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;color:var(--ink)}
 
-.chip{display:inline-block;font-family:var(--cond);font-size:.76rem;border-radius:999px;padding:2px 9px;background:var(--chalk);border:1px solid var(--line);margin:2px 4px 2px 0;color:var(--ink)}
+.seg{display:flex;gap:4px;padding:4px;margin:12px 14px;border-radius:16px;background:rgba(255,255,255,.5);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);border:1px solid var(--glass-b)}
+.seg button{flex:1;height:42px;padding:0 4px;border:0;border-radius:12px;background:transparent;color:var(--soft);font-size:13px;font-weight:600}
+.seg button.on{background:#fff;color:var(--ink);font-weight:700;box-shadow:0 1px 3px rgba(17,17,20,.1)}
+
+.strip{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px;padding:10px 8px;border-radius:18px;background:var(--glass);-webkit-backdrop-filter:blur(24px);backdrop-filter:blur(24px);border:1px solid var(--glass-b);margin:12px 14px}
+.strip button{min-width:0;display:flex;flex-direction:column;align-items:center;gap:4px;padding:4px 0;border-radius:12px;background:transparent;color:var(--soft);font-size:11px;font-weight:600}
+.strip b{font-size:14px;color:var(--ink)}
+.strip i{width:6px;height:6px;border-radius:3px;display:block;background:transparent}
+.strip i.done{background:#34C759}.strip i.miss{background:var(--red)}.strip i.plan{background:#A1A1AA}
+.strip button.on{background:var(--accent);color:#fff}.strip button.on b{color:#fff}.strip button.on i{background:#fff}
+
+.kcal{font-size:2.3rem;font-weight:800;line-height:1}
+.bar{height:8px;border-radius:4px;background:var(--line);overflow:hidden;margin:8px 0}
+.bar i{display:block;height:100%;border-radius:4px;background:var(--grad);background-size:200% 100%;animation:shift 9s linear infinite}
+.mac{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;font-size:13px;color:var(--soft);margin-top:10px}
+.mac b{font-size:15px;color:var(--ink);display:block}
 
 table.sets{width:100%;margin-top:6px;border-collapse:collapse}
-table.sets th{font-size:.68rem;text-transform:uppercase;color:var(--soft);text-align:left;padding:3px 2px}
-table.sets td{padding:5px 2px;vertical-align:middle;font-size:.9rem}
-table.sets tr.done td{background:var(--good)}
-.chk{width:34px;height:32px;padding:0;background:var(--chalk);color:var(--soft);border:1px solid var(--line);font-family:var(--cond)}
-.chk.on{background:var(--green);color:#fff;border-color:var(--green)}
+table.sets th{font-size:.68rem;text-transform:uppercase;color:var(--soft);text-align:left;padding:3px 2px;font-weight:700}
+table.sets td{padding:6px 2px;vertical-align:middle;font-size:.9rem}
+table.sets tr.done td{background:color-mix(in srgb,var(--mint) 16%,transparent)}
+.chk{width:34px;height:32px;padding:0;background:var(--input);color:var(--soft);border:1px solid var(--line);border-radius:9px}
+.chk.on{background:var(--mint);color:#fff;border-color:var(--mint)}
 
-.mb{margin:9px 0}
-.mb-h{display:flex;justify-content:space-between;font-size:.78rem;color:var(--soft)}
-.mb-h b{color:var(--ink);font-family:var(--cond);font-size:.96rem}
-.mb-t{height:8px;background:var(--chalk);border-radius:99px;overflow:hidden}
-.mb-t i{display:block;height:100%;background:var(--green);border-radius:99px}
-.meal{border-left:6px solid var(--line);padding-left:8px}
-.meal.done{border-left-color:var(--green)}
+.subnav{display:flex;gap:6px;flex-wrap:wrap;margin:10px 14px 0}
+.subnav button{background:var(--input);color:var(--accent);border:1px solid var(--line);padding:8px 13px;border-radius:999px;font-size:.85rem}
+.subnav button.on{background:var(--accent);color:#fff;border-color:var(--accent)}
 
-.subnav{display:flex;gap:6px;margin-bottom:8px}
-.subnav button{flex:1}
-.subnav button.off{background:transparent;color:var(--soft);border:1px solid var(--line)}
-
-nav.tabs{position:absolute;left:0;right:0;bottom:0;z-index:30;background:var(--paper);border-top:1px solid var(--line);display:flex;padding:6px 2px}
-nav.tabs button{flex:1;background:transparent;color:var(--soft);padding:6px 1px;border-radius:8px;font-size:.78rem;font-weight:600}
-nav.tabs button.on{color:var(--ink);background:var(--chalk)}
-
-/* bilan, 1RM, chat */
-textarea{font:inherit;font-size:.92rem;color:var(--ink);background:var(--input);border:1px solid var(--line);border-radius:8px;padding:8px;width:100%;min-height:60px}
-input[type="number"]{font:inherit;font-size:16px;color:var(--ink);background:var(--input);border:1px solid var(--line);border-radius:8px;padding:8px;width:100%}
-label.f{display:block;font-size:.76rem;color:var(--soft);margin-bottom:10px}
-.toggle{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-top:1px solid var(--line)}
+textarea{font:inherit;font-size:.92rem;color:var(--ink);background:var(--input);border:1px solid var(--line);border-radius:10px;padding:9px;width:100%;min-height:60px}
+input[type="number"],input[type="password"],input[type="email"]{font:inherit;font-size:16px;color:var(--ink);background:var(--input);border:1px solid var(--line);border-radius:10px;padding:9px;width:100%}
+label.f{display:block;font-size:.76rem;color:var(--soft);margin-bottom:10px;font-weight:600}
+.toggle{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-top:1px solid var(--line)}
 .toggle:first-child{border-top:0}
 .sw{width:42px;height:24px;border-radius:999px;background:var(--line);position:relative;border:0;padding:0;cursor:pointer}
 .sw i{position:absolute;top:2px;left:2px;width:20px;height:20px;border-radius:50%;background:#fff;transition:left .15s}
-.sw.on{background:var(--green)}
+.sw.on{background:var(--mint)}
 .sw.on i{left:20px}
 
-.chat-overlay{position:absolute;inset:0;background:rgba(0,0,0,.4);z-index:40;display:none}
+/* barre du bas */
+nav.tabs{position:absolute;left:0;right:0;bottom:0;z-index:30;background:var(--glass-bar);-webkit-backdrop-filter:saturate(180%) blur(24px);backdrop-filter:saturate(180%) blur(24px);border-top:1px solid var(--glass-b);display:flex;padding:6px 4px}
+nav.tabs button{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;background:transparent;color:var(--soft);font-size:11px;font-weight:600;padding:3px 1px;border-radius:12px}
+nav.tabs button.on{color:var(--accent);background:transparent}
+nav.tabs svg{width:22px;height:22px;flex:0 0 auto}
+
+/* bulle de messagerie flottante */
+#msgfab{position:absolute;right:14px;bottom:70px;z-index:45;width:54px;height:54px;border-radius:50%;padding:0;display:flex;align-items:center;justify-content:center;background:var(--gradbtn);background-size:200% 100%;animation:shift 10s linear infinite;box-shadow:0 8px 24px rgba(0,98,224,.35)}
+#msgfab svg{width:24px;height:24px}
+
+.chat-overlay{position:absolute;inset:0;background:rgba(0,0,0,.35);z-index:40;display:none}
 .chat-overlay.on{display:block}
-.chat-sheet{position:absolute;left:0;right:0;bottom:0;height:78%;background:var(--chalk);border-radius:20px 20px 0 0;display:flex;flex-direction:column}
-.chat-head{background:var(--ink);color:var(--paper);padding:12px 14px;border-radius:20px 20px 0 0;display:flex;justify-content:space-between;align-items:center}
-.chat-head b{font-family:var(--cond);font-size:1.05rem}
-.chat-head button{background:transparent;color:var(--paper);border:1px solid rgba(255,255,255,.4);padding:4px 10px}
+.chat-sheet{position:absolute;left:0;right:0;bottom:0;height:78%;background:var(--chalk);border-radius:20px 20px 0 0;display:flex;flex-direction:column;box-shadow:0 -10px 40px rgba(0,0,0,.2)}
+.chat-head{background:var(--glass-bar);-webkit-backdrop-filter:blur(24px);backdrop-filter:blur(24px);color:var(--ink);padding:12px 14px;border-radius:20px 20px 0 0;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line)}
+.chat-head b{font-weight:800;font-size:1.02rem}
+.chat-head button{background:var(--input);color:var(--accent);border:1px solid var(--line);padding:5px 11px}
 .chat-body{flex:1;overflow-y:auto;padding:10px 12px}
-.bubble{max-width:78%;padding:8px 11px;border-radius:14px;margin:6px 0;font-size:.9rem;line-height:1.35}
-.bubble.coach{background:var(--paper);border:1px solid var(--line);border-bottom-left-radius:3px}
-.bubble.client{background:var(--blue);color:#fff;margin-left:auto;border-bottom-right-radius:3px}
+.bubble{max-width:78%;padding:9px 12px;border-radius:16px;margin:6px 0;font-size:.9rem;line-height:1.35}
+.bubble.coach{background:var(--glass);border:1px solid var(--glass-b);border-bottom-left-radius:4px}
+.bubble.client{background:var(--accent);color:#fff;margin-left:auto;border-bottom-right-radius:4px}
 .chat-foot{padding:8px;border-top:1px solid var(--line);display:flex;gap:6px;background:var(--paper)}
-.chat-foot input{flex:1;font:inherit;font-size:.92rem;border:1px solid var(--line);border-radius:999px;padding:9px 13px;background:var(--chalk)}
+.chat-foot input{flex:1;font:inherit;font-size:.92rem;border:1px solid var(--line);border-radius:999px;padding:10px 14px;background:var(--input)}
 .chat-note{font-size:.68rem;color:var(--soft);text-align:center;padding:4px 10px 8px;background:var(--paper)}
 .typing{font-size:.8rem;color:var(--soft);font-style:italic;padding:4px 2px}
 
@@ -127,8 +151,8 @@ svg.chart{width:100%;height:auto}
 .foot-note{max-width:560px;margin:24px auto 0;color:#8A96A3;font-size:.78rem;line-height:1.5;text-align:center}
 .foot-note a{color:#C7CDD4}
 .cta-row{display:flex;justify-content:center;gap:10px;margin:22px 0 0;flex-wrap:wrap}
-.cta{font-family:var(--cond);font-weight:700;font-size:1rem;border-radius:999px;padding:12px 22px;text-decoration:none;display:inline-block}
-.cta.primary{background:var(--yellow);color:#1B1B1B}
+.cta{font-weight:700;font-size:1rem;border-radius:999px;padding:12px 22px;text-decoration:none;display:inline-block}
+.cta.primary{background:#3FD2B5;color:#073B32}
 .cta.ghost{background:transparent;color:#EDEFF2;border:1px solid rgba(255,255,255,.35)}
 </style>
 </head>
@@ -139,47 +163,100 @@ svg.chart{width:100%;height:auto}
   <div class="intro">
     <p class="kicker">🧪 Démo interactive</p>
     <h1>L'application que j'utilise pour suivre mes clients</h1>
-    <p>Programme, carnet d'entraînement, suivi alimentaire, mesures et messagerie avec moi : voici ce que reçoit un client du cycle de 12 semaines. Explorez l'appli ci-dessous avec un profil fictif, « Julien ».</p>
+    <p>Programme, carnet d'entraînement, suivi alimentaire, mesures et messagerie avec moi : voici ce que reçoit un client du cycle de 12 semaines. Explore l'appli ci-dessous avec un profil fictif, « Julien ».</p>
     <p class="note">Démo autonome : aucune donnée saisie ici n'est enregistrée, transmise ou visible par qui que ce soit. « Julien » est un profil 100&nbsp;% fictif, utilisé uniquement pour illustrer le fonctionnement de l'application.</p>
   </div>
 
   <div class="phone">
-    <div class="phone-screen">
+    <div class="tag">🧪 Démo — données fictives</div>
+    <div class="phone-screen tdy" id="screen">
+      <div id="bg"><i></i><i></i></div>
+
       <header class="top">
-        <span class="role">DÉMO</span>
-        <h1>TB my Coach</h1>
-        <div class="sub">Julien · Semaine 5/12 · Bloc Accumulation</div>
+        <h1><img src="img/logo.png" alt="">Julien</h1>
+        <div class="sub">S5/12 · Accumulation · Upper/Lower/Upper/Lower/Upper 5j</div>
       </header>
 
       <div class="phone-content">
+        <main class="pad">
+
+        <!-- ACCUEIL -->
+        <div class="view on" id="v-accueil">
+          <div class="hero">
+            <div class="grow">
+              <p class="eyebrow" id="accueil-date"></p>
+              <h2>Bonjour Julien</h2>
+            </div>
+            <button class="avatar" data-goto="v-compte">JL</button>
+          </div>
+
+          <div class="seg" role="tablist">
+            <button class="on" data-seg="v-accueil">Aujourd'hui</button>
+            <button data-seg="v-semaine">Semaine</button>
+            <button data-seg="v-objectifs">Progrès</button>
+          </div>
+
+          <div class="strip" id="strip"></div>
+
+          <div class="card">
+            <p class="eyebrow">🏋️ Séance du jour</p>
+            <h3 style="font-size:1.3rem">Upper 3</h3>
+            <p class="small muted">6 exercices · environ 55 min</p>
+            <button class="big" data-goto="v-carnet">Commencer la séance</button>
+          </div>
+
+          <div class="card">
+            <p class="eyebrow">🍽️ Alimentation</p>
+            <div class="row" style="justify-content:space-between;align-items:baseline">
+              <span class="kcal">1 850</span>
+              <span class="small muted">/ 2 100 kcal</span>
+            </div>
+            <div class="bar"><i style="width:88%"></i></div>
+            <div class="mac">
+              <div><span>Protéines</span><b>128 / 150 g</b></div>
+              <div><span>Glucides</span><b>190 / 230 g</b></div>
+              <div><span>Lipides</span><b>58 / 70 g</b></div>
+            </div>
+            <div class="row" style="justify-content:space-between;margin-top:10px">
+              <span class="small muted">2/3 repas notés</span>
+              <button class="ok sm" data-goto="v-suivi">Valider mes repas</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <p class="eyebrow">📈 Progrès</p>
+            <h3>Mes progrès <span class="chip">1 record récent</span></h3>
+            <p class="small muted">Records, objectif de la phase et bilan de cycle.</p>
+            <button class="ghost sm" data-goto="v-objectifs">Voir mes progrès</button>
+          </div>
+        </div>
 
         <!-- SEMAINE -->
-        <div class="view on" id="v-semaine">
-          <h2>Cette semaine</h2>
-          <div class="weeks" id="weeks"></div>
-          <div class="kpis">
-            <div class="kpi"><b>3/3</b><span>séances faites</span></div>
-            <div class="kpi"><b>5/12</b><span>semaines</span></div>
-          </div>
-          <div class="card">
-            <h3>Prochaine séance</h3>
-            <p class="small muted">Vendredi · Haut du corps — Force</p>
-            <button class="sm" data-goto="v-carnet">Voir la séance</button>
-          </div>
-          <div class="card">
-            <h3>📈 Mes progrès</h3>
-            <p class="small muted">Records personnels et objectifs du bloc en cours.</p>
-            <button class="ghost sm" data-goto="v-objectifs">Voir mes progrès</button>
+        <div class="view" id="v-semaine">
+          <h2>Semaine 5 · Accumulation</h2>
+          <div class="strip" id="strip2" style="margin-left:0;margin-right:0"></div>
+          <div class="card ses">
+            <h3>Upper 3 · Vendredi</h3>
+            <p class="small muted">≈ 55 min · 24 séries</p>
+            <p style="margin:10px 0 2px"><b>Développé couché barre</b></p>
+            <p class="small muted" style="margin:0">4 × 6 @ 75 kg (82 %, RPE 8)</p>
+            <p class="small" style="margin:8px 0 0"><button class="ghost sm" data-goto="v-carnet">Voir le détail dans le carnet</button></p>
           </div>
         </div>
 
         <!-- CARNET -->
         <div class="view" id="v-carnet">
-          <h2>Carnet</h2>
-          <div class="card ses">
-            <h3>Haut du corps — Force</h3>
-            <p class="small muted">Séance du jour · bloc Accumulation</p>
+          <h2>Carnet · S5</h2>
+          <div class="subnav" id="carnet-days"></div>
+          <div class="card ses" style="margin:12px 0 10px">
+            <h3>Upper 3 · Vendredi</h3>
+            <p class="small muted" style="margin:0 0 8px">0/24 séries faites</p>
             <table class="sets" id="sets-table"></table>
+            <div class="row" style="margin-top:12px;gap:8px">
+              <button class="big" style="flex:2" data-goto="chat">▶ Commencer la séance</button>
+              <button class="ok sm">✓ Faite</button>
+              <button class="danger sm">✗ Loupée</button>
+            </div>
           </div>
           <div class="card">
             <h3>Bilan de la semaine</h3>
@@ -196,31 +273,34 @@ svg.chart{width:100%;height:auto}
         <!-- SUIVI -->
         <div class="view" id="v-suivi">
           <h2>Suivi</h2>
-          <div class="subnav">
-            <button id="sub-nutrition">Nutrition</button>
-            <button class="off" id="sub-mesures">Mesures</button>
+          <div class="subnav" style="margin-left:0;margin-right:0">
+            <button id="sub-nutrition" class="on">Aujourd'hui</button>
+            <button id="sub-mesures">Mesures</button>
+            <button disabled>Mon plan</button>
+            <button disabled>Courses</button>
           </div>
 
           <div id="pane-nutrition">
             <div class="card">
-              <div class="mb">
-                <div class="mb-h"><span>Calories</span><b>1 850 / 2 100 kcal</b></div>
-                <div class="mb-t"><i style="width:88%"></i></div>
+              <span class="kcal">1 850</span><span class="small muted"> / 2 100 kcal prévues</span>
+              <div class="bar"><i style="width:88%"></i></div>
+              <div class="mac">
+                <div><span>Prot.</span><b>128 / 150 g</b></div>
+                <div><span>Gluc.</span><b>190 / 230 g</b></div>
+                <div><span>Lip.</span><b>58 / 70 g</b></div>
               </div>
-              <div class="mb">
-                <div class="mb-h"><span>Protéines</span><b>128 / 150 g</b></div>
-                <div class="mb-t"><i style="width:85%"></i></div>
-              </div>
+              <p class="small muted" style="margin-top:10px">2 repas sur 3 notés</p>
+              <button class="ok sm">✓ Tout le reste mangé comme prévu</button>
             </div>
-            <div class="card meal done">
-              <h3>🍳 Petit-déjeuner</h3>
-              <p class="small muted">Fromage blanc, flocons d'avoine, fruits — noté ✓</p>
+            <div class="card">
+              <h3>🍳 Petit-déjeuner <span class="chip on">noté</span></h3>
+              <p class="small muted">Fromage blanc, flocons d'avoine, fruits</p>
             </div>
-            <div class="card meal done">
-              <h3>🍗 Déjeuner</h3>
-              <p class="small muted">Poulet, riz, légumes — noté ✓</p>
+            <div class="card">
+              <h3>🍗 Déjeuner <span class="chip on">noté</span></h3>
+              <p class="small muted">Poulet, riz, légumes</p>
             </div>
-            <div class="card meal">
+            <div class="card">
               <h3>🥗 Dîner</h3>
               <p class="small muted">Pas encore noté</p>
               <button class="sm" disabled>Ajouter (désactivé en démo)</button>
@@ -231,11 +311,11 @@ svg.chart{width:100%;height:auto}
             <div class="card">
               <h3>Poids — 5 dernières semaines <span class="chip">exemple fictif</span></h3>
               <svg class="chart" viewBox="0 0 320 120" aria-label="Évolution du poids de Julien sur 5 semaines, exemple fictif">
-                <polyline points="20,100 90,78 160,56 230,42 300,20" fill="none" stroke="#1F4FB5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                <g fill="#1F4FB5">
+                <polyline points="20,100 90,78 160,56 230,42 300,20" fill="none" stroke="#0062E0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                <g fill="#0062E0">
                   <circle cx="20" cy="100" r="3.5"/><circle cx="90" cy="78" r="3.5"/><circle cx="160" cy="56" r="3.5"/><circle cx="230" cy="42" r="3.5"/><circle cx="300" cy="20" r="3.5"/>
                 </g>
-                <g font-family="Barlow Condensed" font-size="10" fill="#5B6673">
+                <g font-size="10" fill="#5B5B66">
                   <text x="12" y="114">S1</text><text x="82" y="114">S2</text><text x="152" y="114">S3</text><text x="222" y="114">S4</text><text x="290" y="114">S5</text>
                 </g>
               </svg>
@@ -250,7 +330,7 @@ svg.chart{width:100%;height:auto}
 
         <!-- OBJECTIFS -->
         <div class="view" id="v-objectifs">
-          <h2>Objectifs</h2>
+          <h2>Progrès</h2>
           <div class="card">
             <h3>Objectif du bloc en cours</h3>
             <p class="small muted">Consolider la technique et la régularité avant d'augmenter les charges — pas de date ni de chiffre figé, le rythme dépend de la récupération de Julien.</p>
@@ -280,15 +360,29 @@ svg.chart{width:100%;height:auto}
         <div class="view" id="v-compte">
           <h2>Compte</h2>
           <div class="card">
-            <h3>Julien</h3>
-            <p class="small muted">julien@exemple.fr (fictif) · inscrit depuis 5 semaines</p>
+            <p class="small muted" style="margin:0 0 10px">Connecté : julien@exemple.fr (fictif)</p>
+            <div class="row">
+              <button class="ghost sm">Clair / sombre</button>
+              <button class="sm">Se déconnecter</button>
+            </div>
+            <div class="row" style="margin-top:10px">
+              <label class="f" style="flex:1">Choisir / changer mon mot de passe<input type="password" placeholder="8 caractères minimum"></label>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Mon coach</h3>
+            <p class="small muted">Un point à faire, un bilan, une question qui mérite un appel ?</p>
+            <button class="ghost sm" id="open-chat">Réserver un rendez-vous</button>
+          </div>
+          <div class="card">
+            <div class="row" style="gap:8px">
+              <button class="ghost sm" data-goto="v-objectifs">📈 Mes progrès</button>
+              <button class="ghost sm" data-goto="v-outils">🧰 Outils (1RM, charges)</button>
+            </div>
           </div>
           <div class="card">
             <div class="toggle"><span class="small">Rappel de séance</span><button class="sw on" id="sw1"><i></i></button></div>
             <div class="toggle"><span class="small">Rappel de bilan du dimanche</span><button class="sw on" id="sw2"><i></i></button></div>
-          </div>
-          <div class="card">
-            <button id="open-chat">💬 Écrire à Thomas</button>
           </div>
           <div class="card">
             <button class="ghost sm" disabled>Télécharger mes données (désactivé en démo)</button>
@@ -298,16 +392,20 @@ svg.chart{width:100%;height:auto}
           </div>
         </div>
 
+        </main>
       </div>
 
       <nav class="tabs" id="tabs">
-        <button data-goto="v-semaine" class="on">Semaine</button>
-        <button data-goto="v-carnet">Carnet</button>
-        <button data-goto="v-suivi">Suivi</button>
-        <button data-goto="v-objectifs">Objectifs</button>
-        <button data-goto="v-outils">Outils</button>
-        <button data-goto="v-compte">Compte</button>
+        <button data-goto="v-accueil" class="on" data-ic="home">Accueil</button>
+        <button data-goto="v-semaine" data-ic="cal">Semaine</button>
+        <button data-goto="v-carnet" data-ic="gym">Carnet</button>
+        <button data-goto="v-suivi" data-ic="bars">Suivi</button>
+        <button data-goto="v-compte" data-ic="user">Compte</button>
       </nav>
+
+      <button id="msgfab" aria-label="Messagerie">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-8.9 8.4 8.5 8.5 0 0 1-4-1L3 20l1.1-5.1A8.38 8.38 0 0 1 12.6 3a8.5 8.5 0 0 1 8.4 8.5z"/></svg>
+      </button>
 
       <!-- MESSAGERIE -->
       <div class="chat-overlay" id="chat-overlay">
@@ -347,31 +445,65 @@ svg.chart{width:100%;height:auto}
 (function(){
   "use strict";
 
+  var ICONS = {
+    home: '<path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>',
+    cal: '<rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/>',
+    gym: '<path d="M6 7v10M18 7v10M3 10v4M21 10v4M6 12h12"/>',
+    bars: '<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',
+    user: '<circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/>'
+  };
+  document.querySelectorAll("#tabs button[data-ic]").forEach(function(b){
+    var svg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + ICONS[b.dataset.ic] + '</svg>';
+    b.insertAdjacentHTML("afterbegin", svg);
+  });
+
+  var screen = document.getElementById("screen");
   function showView(id){
     document.querySelectorAll(".view").forEach(function(v){ v.classList.toggle("on", v.id===id); });
-    document.querySelectorAll("#tabs button").forEach(function(b){ b.classList.toggle("on", b.dataset.goto===id); });
+    document.querySelectorAll("#tabs button[data-goto]").forEach(function(b){ b.classList.toggle("on", b.dataset.goto===id); });
+    document.querySelectorAll(".seg button[data-seg]").forEach(function(b){ b.classList.toggle("on", b.dataset.seg===id); });
+    screen.classList.toggle("tdy", id === "v-accueil");
     var content = document.querySelector(".phone-content");
     if (content) content.scrollTop = 0;
   }
   document.querySelectorAll("[data-goto]").forEach(function(b){
-    b.addEventListener("click", function(){ showView(b.dataset.goto); });
+    b.addEventListener("click", function(){
+      if (b.dataset.goto === "chat") { document.getElementById("chat-overlay").classList.add("on"); return; }
+      showView(b.dataset.goto);
+    });
+  });
+  document.querySelectorAll("[data-seg]").forEach(function(b){
+    b.addEventListener("click", function(){ showView(b.dataset.seg); });
   });
 
-  // Semaine : bloc de 12 semaines, semaine 5 en cours (données fictives)
-  var weeksEl = document.getElementById("weeks");
-  var phases = ["Accumulation","Accumulation","Accumulation","Accumulation","Accumulation","Accumulation","Transmutation","Transmutation","Transmutation","Réalisation","Réalisation","Deload"];
-  var html = "";
-  for (var i=1;i<=12;i++){
-    html += '<div class="wk' + (i===5 ? " on" : "") + '"><b>' + i + '</b><span>' + phases[i-1].slice(0,4) + '</span></div>';
+  var dateEl = document.getElementById("accueil-date");
+  var jour = new Date().toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long" });
+  dateEl.textContent = jour.charAt(0).toUpperCase() + jour.slice(1) + " · Semaine 5/12 · Accumulation";
+
+  // Bandes de jours (L M M J V S D), données fictives
+  var statuts = ["done", "done", "miss", "done", "plan", "", ""];
+  function buildStrip(el, onIndex){
+    var L = ["L", "M", "M", "J", "V", "S", "D"];
+    var html = "";
+    L.forEach(function(l, i){
+      html += '<button class="' + (i === onIndex ? "on" : "") + '">' + l + "<b>" + (6 + i) + "</b><i class=\"" + statuts[i] + "\"></i></button>";
+    });
+    el.innerHTML = html;
   }
-  weeksEl.innerHTML = html;
+  buildStrip(document.getElementById("strip"), 4);
+  buildStrip(document.getElementById("strip2"), 4);
+
+  // Carnet : jours de la semaine
+  var jours = ["Upper 1 · Lun.", "Lower 1 · Mar.", "Upper 2 · Mer.", "Lower 2 · Jeu.", "Upper 3 · Ven."];
+  var carnetDays = document.getElementById("carnet-days");
+  carnetDays.innerHTML = jours.map(function(j, i){ return '<button class="' + (i === 4 ? "on" : "") + '">' + j + "</button>"; }).join("");
 
   // Carnet : table de séries avec cases à cocher
   var exos = [
-    {n:"Développé couché", presc:"4×6 @ 75 kg"},
-    {n:"Tirage horizontal", presc:"4×8 @ 60 kg"},
-    {n:"Développé militaire", presc:"3×8 @ 40 kg"},
-    {n:"Curl biceps", presc:"3×12 @ 14 kg"}
+    { n: "Développé couché barre", presc: "4 × 6 @ 75 kg" },
+    { n: "Tirage horizontal", presc: "4 × 8 @ 60 kg" },
+    { n: "Développé militaire", presc: "3 × 8 @ 40 kg" },
+    { n: "Curl biceps", presc: "3 × 12 @ 14 kg" }
   ];
   var setsTable = document.getElementById("sets-table");
   var rows = "<tr><th>Exercice</th><th>Prescrit</th><th>Fait</th></tr>";
@@ -387,15 +519,15 @@ svg.chart{width:100%;height:auto}
     document.getElementById("row-" + btn.dataset.row).classList.toggle("done");
   });
 
-  // Suivi : sous-onglets Nutrition / Mesures
+  // Suivi : sous-onglets Aujourd'hui / Mesures
   var subN = document.getElementById("sub-nutrition"), subM = document.getElementById("sub-mesures");
   var paneN = document.getElementById("pane-nutrition"), paneM = document.getElementById("pane-mesures");
   function setSub(which){
     var isN = which === "n";
     paneN.style.display = isN ? "" : "none";
     paneM.style.display = isN ? "none" : "";
-    subN.classList.toggle("off", !isN);
-    subM.classList.toggle("off", isN);
+    subN.classList.toggle("on", isN);
+    subM.classList.toggle("on", !isN);
   }
   subN.addEventListener("click", function(){ setSub("n"); });
   subM.addEventListener("click", function(){ setSub("m"); });
@@ -412,7 +544,7 @@ svg.chart{width:100%;height:auto}
   });
 
   // Compte : interrupteurs visuels, reset
-  ["sw1","sw2"].forEach(function(id){
+  ["sw1", "sw2"].forEach(function(id){
     document.getElementById(id).addEventListener("click", function(){ this.classList.toggle("on"); });
   });
   document.getElementById("reset-demo").addEventListener("click", function(){
@@ -420,11 +552,12 @@ svg.chart{width:100%;height:auto}
       '<div class="bubble coach">Salut Julien 👋 Comment s\'est passée la séance d\'hier ?</div>' +
       '<div class="bubble client">Hyper bien, j\'ai tenu les charges prévues sur les 4 séries 💪</div>' +
       '<div class="bubble coach">Nickel, on garde ce rythme cette semaine. N\'oublie pas ton bilan dimanche.</div>';
-    showView("v-semaine");
+    showView("v-accueil");
   });
 
   // Messagerie scénarisée — aucune donnée n'est envoyée nulle part
   var overlay = document.getElementById("chat-overlay");
+  document.getElementById("msgfab").addEventListener("click", function(){ overlay.classList.add("on"); });
   document.getElementById("open-chat").addEventListener("click", function(){ overlay.classList.add("on"); });
   document.getElementById("close-chat").addEventListener("click", function(){ overlay.classList.remove("on"); });
 
