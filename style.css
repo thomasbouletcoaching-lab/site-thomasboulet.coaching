@@ -120,18 +120,32 @@ p{margin:0 0 1em}
 .legende-semaine span{color:var(--acier);font-size:.98rem}
 @media (max-width:640px){.semaine .heures{gap:2px}.semaine{gap:4px 8px}.legende-semaine{grid-template-columns:1fr;gap:16px}}
 
-/* Différences : liste à deux colonnes "eux / moi" */
-.difference{display:grid;gap:0;border-top:1px solid var(--trait)}
-.difference .ligne{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:24px;padding:24px 0;border-bottom:1px solid var(--trait)}
-.difference .eux{color:var(--gris);font-size:1.02rem;font-style:italic}
+/* Différences : deux cartes bien séparées "eux / moi" */
+.difference{display:grid;gap:28px}
+.difference .ligne{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:16px;align-items:stretch}
+.difference .eux,.difference .moi{border-radius:14px;padding:18px 20px}
+.difference .eux{background:var(--craie);border:1px solid var(--trait);color:var(--gris);font-size:1.02rem;font-style:italic}
 .difference .eux s{text-decoration-color:rgba(86,98,122,.5)}
+.difference .moi{background:#fff;border:1.5px solid var(--bleu);box-shadow:0 14px 30px -20px rgba(61,123,242,.45)}
 .difference .moi h3{margin-bottom:6px}
 .difference .moi p{margin:0;color:var(--gris)}
-.difference .entete{font-family:var(--titre);font-weight:600;font-size:1.1rem;color:var(--gris);padding:12px 0;border-bottom:1px solid var(--trait)}
-.difference .tag-eux,.difference .tag-moi{display:block;font-family:var(--titre);font-weight:700;font-size:.74rem;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px}
+.difference .entete{font-family:var(--titre);font-weight:600;font-size:1.1rem;color:var(--gris);padding:0 0 4px}
+.difference .tag-eux,.difference .tag-moi{display:block;font-family:var(--titre);font-weight:700;font-size:.74rem;text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px}
 .difference .tag-eux{color:var(--ko)}
 .difference .tag-moi{color:var(--bleu-fonce)}
-@media (max-width:700px){.difference .ligne{grid-template-columns:1fr;gap:8px}.difference .entete{display:none}}
+@media (max-width:700px){.difference .ligne{grid-template-columns:1fr;gap:14px}.difference .entete{display:none}}
+
+/* Aujourd'hui / ce qui change */
+.transfo{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:24px 0 36px}
+.transfo>div{border-radius:16px;padding:24px}
+.transfo .avant{background:var(--craie);border:1px solid var(--trait)}
+.transfo .apres{background:#fff;border:1.5px solid var(--bleu);box-shadow:0 16px 36px -22px rgba(61,123,242,.5)}
+.transfo .tag{display:block;font-family:var(--titre);font-weight:700;font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px}
+.transfo .avant .tag{color:var(--gris)}
+.transfo .apres .tag{color:var(--bleu-fonce)}
+.transfo p{margin:0;color:var(--encre);font-size:1.02rem}
+.transfo .avant p{color:var(--gris)}
+@media (max-width:700px){.transfo{grid-template-columns:1fr}}
 
 /* Poutres de la méthode */
 .poutres{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border-left:1px solid var(--trait-nuit)}
