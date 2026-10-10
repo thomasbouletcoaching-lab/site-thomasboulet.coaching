@@ -40,6 +40,8 @@ h3{font-size:1.55rem;line-height:1.1}
 p{margin:0 0 1em}
 .wrap{max-width:var(--large);margin:0 auto;padding:0 var(--gouttiere)}
 .lisible{max-width:64ch}
+.photo-flotte{float:right;width:min(220px,40%);aspect-ratio:4/5;object-fit:cover;object-position:50% 15%;border-radius:14px;margin:4px 0 18px 22px}
+@media (max-width:560px){.photo-flotte{width:46%}}
 .saut{position:absolute;left:-9999px}
 .saut:focus{left:16px;top:16px;z-index:200;background:#fff;padding:8px 12px}
 
@@ -127,6 +129,7 @@ p{margin:0 0 1em}
 .difference .eux{background:var(--craie);border:1px solid var(--trait);color:var(--gris);font-size:1.02rem;font-style:italic}
 .difference .eux s{text-decoration-color:rgba(86,98,122,.5)}
 .difference .moi{background:#fff;border:1.5px solid var(--bleu);box-shadow:0 14px 30px -20px rgba(61,123,242,.45)}
+.difference .moi-photo{float:right;width:84px;height:102px;object-fit:cover;object-position:50% 15%;border-radius:10px;margin:0 0 10px 14px}
 .difference .moi h3{margin-bottom:6px}
 .difference .moi p{margin:0;color:var(--gris)}
 .difference .entete{font-family:var(--titre);font-weight:600;font-size:1.1rem;color:var(--gris);padding:0 0 4px}
@@ -145,6 +148,7 @@ p{margin:0 0 1em}
 .transfo .apres .tag{color:var(--bleu-fonce)}
 .transfo p{margin:0;color:var(--encre);font-size:1.02rem}
 .transfo .avant p{color:var(--gris)}
+.transfo .apres img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 20%;border-radius:12px;margin-bottom:14px}
 @media (max-width:700px){.transfo{grid-template-columns:1fr}}
 
 /* Poutres de la méthode */
