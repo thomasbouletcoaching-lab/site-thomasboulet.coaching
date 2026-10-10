@@ -35,6 +35,28 @@ Candidatures, téléchargements du guide et inscriptions aux listes d'attente ar
 3. Chez le registraire, créer les enregistrements DNS indiqués par GitHub
    (4 enregistrements A vers 185.199.108.153, .109.153, .110.153, .111.153, et un CNAME `www` vers `thomasbouletcoaching-lab.github.io`).
 
+## Ajouter une photo soi-même
+
+1. **Mettre la photo dans le dossier `img/`** : ouvrir `img/` sur GitHub → « Add file » → « Upload files » → glisser la photo → « Commit changes ». Format JPG ou WebP, pas trop lourd (quelques centaines de Ko suffisent, pas besoin de la pleine résolution du téléphone). Donner un nom simple sans espace ni accent, ex. `thomas-salle-2.jpg`.
+2. **Ouvrir la page HTML à modifier** (icône crayon), et coller où on veut dans le texte :
+   ```html
+   <img class="photo-libre" src="img/thomas-salle-2.jpg" alt="Thomas Boulet">
+   ```
+   La classe `photo-libre` (déjà prête dans `style.css`) centre l'image, l'arrondit et la limite à une taille raisonnable automatiquement — rien d'autre à faire pour un résultat correct par défaut.
+3. **Recadrer/centrer sans rogner le fichier** : ajouter `style="object-position:X% Y%"` sur la balise. C'est la partie de la photo qui reste visible dans le cadre.
+   - `object-position:50% 50%` = centré (par défaut).
+   - `object-position:50% 20%` = garde le haut de la photo visible (utile pour un visage proche du haut).
+   - `object-position:50% 80%` = garde le bas visible.
+   - Exemple : `<img class="photo-libre" src="img/thomas-salle-2.jpg" alt="Thomas Boulet" style="object-position:50% 25%">`
+4. **Changer la forme ou la taille** avec `style`, toujours sur la même balise :
+   - Carrée plutôt que portrait : `style="aspect-ratio:1/1"`
+   - Plus petite : `style="max-width:240px"`
+   - Collée à droite du texte façon magazine (comme sur `methode.html`) : `style="float:right;max-width:220px;margin:4px 0 16px 22px"`
+   - Tout combiner : `style="aspect-ratio:1/1;max-width:240px;object-position:50% 15%"`
+5. **Commit changes** sur `main` : le site est à jour en 1 à 2 minutes. Si le résultat ne plaît pas, rouvrir le fichier et changer les pourcentages — aucun risque de casser quoi que ce soit, et l'historique des commits permet de revenir en arrière à tout moment (onglet « Commits »).
+
+Ne jamais coller un pourcentage avec le signe `%` oublié ou une virgule à la place du point (`50%,20%` au lieu de `50% 25%`) : la position serait ignorée silencieusement, pas d'erreur visible.
+
 ## Faire une modification
 
 Modifier le fichier sur GitHub (icône crayon), « Commit changes » sur `main` : le site est à jour en 1 à 2 minutes.

@@ -42,6 +42,10 @@ p{margin:0 0 1em}
 .lisible{max-width:64ch}
 .photo-flotte{float:right;width:min(220px,40%);aspect-ratio:4/5;object-fit:cover;object-position:50% 15%;border-radius:14px;margin:4px 0 18px 22px}
 @media (max-width:560px){.photo-flotte{width:46%}}
+
+/* Photo libre : à coller sur n'importe quelle page, centrage/recadrage réglables
+   en ligne avec style="..." sans toucher à ce fichier. Voir README « Ajouter une photo ». */
+.photo-libre{display:block;width:100%;max-width:360px;aspect-ratio:4/5;object-fit:cover;object-position:center;border-radius:14px;margin:20px auto;box-shadow:0 14px 30px -20px rgba(11,20,38,.35)}
 .saut{position:absolute;left:-9999px}
 .saut:focus{left:16px;top:16px;z-index:200;background:#fff;padding:8px 12px}
 
