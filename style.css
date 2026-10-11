@@ -142,18 +142,48 @@ p{margin:0 0 1em}
 .difference .tag-moi{color:var(--bleu-fonce)}
 @media (max-width:700px){.difference .ligne{grid-template-columns:1fr;gap:14px}.difference .entete{display:none}}
 
-/* Aujourd'hui / ce qui change */
-.transfo{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:24px 0 36px}
-.transfo>div{border-radius:16px;padding:24px}
-.transfo .avant{background:var(--craie);border:1px solid var(--trait)}
-.transfo .apres{background:#fff;border:1.5px solid var(--bleu);box-shadow:0 16px 36px -22px rgba(61,123,242,.5)}
-.transfo .tag{display:block;font-family:var(--titre);font-weight:700;font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px}
-.transfo .avant .tag{color:var(--gris)}
-.transfo .apres .tag{color:var(--bleu-fonce)}
-.transfo p{margin:0;color:var(--encre);font-size:1.02rem}
-.transfo .avant p{color:var(--gris)}
-.transfo .apres img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 20%;border-radius:12px;margin-bottom:14px}
-@media (max-width:700px){.transfo{grid-template-columns:1fr}}
+/* Situation actuelle */
+.actuelle-card{background:var(--encre);color:#E6ECF5;border-radius:18px;padding:clamp(26px,4vw,40px);margin:0 0 52px}
+.actuelle-card .tag{display:block;font-family:var(--titre);font-weight:700;font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;color:#8FB4FF;margin-bottom:16px}
+.actuelle-card p{color:#C9D3E3;font-size:1.06rem;max-width:62ch;margin:0 0 .9em}
+.actuelle-card p:last-child{margin-bottom:0}
+
+/* Situation de rêve : points illustrés */
+.reve-tete{margin:0 0 28px}
+.reve-tete h3{font-family:var(--titre);font-weight:700;font-size:1.5rem;margin-bottom:10px}
+.reve-tete p{color:var(--gris);max-width:62ch;margin:0}
+
+.reve-item{display:flow-root;margin-bottom:44px}
+.reve-item img{width:min(260px,42%);aspect-ratio:4/5;object-fit:cover;border-radius:14px}
+.reve-item.droite img{float:right;margin:4px 0 16px 24px}
+.reve-item.gauche img{float:left;margin:4px 24px 16px 0}
+.reve-item h4{font-family:var(--titre);font-weight:700;font-size:1.2rem;margin-bottom:8px}
+.reve-item p{color:var(--gris);max-width:56ch}
+@media (max-width:560px){.reve-item img{width:46%}}
+
+.famille-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:18px 0 4px}
+.famille-grid img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 20%;border-radius:10px}
+@media (max-width:700px){.famille-grid{grid-template-columns:repeat(2,1fr)}}
+
+.alimentation-card{background:var(--craie);border:1px solid var(--trait);border-radius:16px;padding:26px 28px;margin:0 0 44px}
+.alimentation-card h4{font-family:var(--titre);font-weight:700;font-size:1.2rem;margin-bottom:8px}
+.alimentation-card p{color:var(--gris);margin:0;max-width:62ch}
+
+.salle-feature{display:grid;grid-template-columns:.8fr 1.2fr;gap:28px;align-items:center;background:var(--nuit);border-radius:18px;padding:clamp(20px,3vw,32px);margin-bottom:18px}
+.salle-feature .photo{display:flex;justify-content:center}
+.salle-feature .photo img{width:auto;max-width:100%;max-height:420px;filter:drop-shadow(0 16px 30px rgba(0,0,0,.5))}
+.salle-feature h4{color:#fff;font-family:var(--titre);font-weight:700;font-size:1.3rem;margin-bottom:10px}
+.salle-feature p{color:#C9D3E3;margin:0}
+@media (max-width:760px){.salle-feature{grid-template-columns:1fr}.salle-feature .photo img{max-height:320px}}
+
+.salle-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:0 0 48px}
+.salle-grid figure{margin:0}
+.salle-grid img{width:100%;aspect-ratio:3/4;object-fit:contain;background:var(--craie);border-radius:10px}
+.salle-grid figcaption{font-size:.78rem;color:var(--gris);text-align:center;margin-top:6px}
+@media (max-width:700px){.salle-grid{grid-template-columns:repeat(2,1fr)}}
+
+.pont{background:#fff;border:1.5px solid var(--bleu);box-shadow:0 16px 36px -22px rgba(61,123,242,.5);border-radius:16px;padding:clamp(22px,4vw,30px);margin:4px 0 40px}
+.pont p{margin:0;color:var(--encre);font-size:1.05rem;max-width:66ch}
 
 /* Poutres de la méthode */
 .poutres{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border-left:1px solid var(--trait-nuit)}
