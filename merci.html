@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Merci · Thomas Boulet</title>
+<meta name="description" content="Programmes, app TB my Coach, cycles de 6 mois et coaching complet : toutes les offres de Thomas Boulet Coaching.">
+<link rel="canonical" href="https://thomasbouletcoaching-lab.github.io/thomasboulet-coaching/offres.html">
+<meta property="og:url" content="https://thomasbouletcoaching-lab.github.io/thomasboulet-coaching/offres.html">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0B1426">
+<link rel="icon" href="favicon.ico"><link rel="icon" type="image/png" href="favicon-clair.png" media="(prefers-color-scheme: light)"><link rel="icon" type="image/png" href="favicon-sombre.png" media="(prefers-color-scheme: dark)">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="Boutique · Thomas Boulet">
+<meta property="og:description" content="Programmes, app TB my Coach, cycles de 6 mois et coaching complet : toutes les offres de Thomas Boulet Coaching.">
+<meta property="og:image" content="https://thomasbouletcoaching-lab.github.io/thomasboulet-coaching/img/partage.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="saut" href="#contenu">Aller au contenu</a>
+<header class="nav">
+  <div class="wrap">
+    <a class="marque" href="index.html"><img src="img/logo.png" alt="" width="36" height="36">Thomas Boulet</a>
+    <button class="burger" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
+    <ul class="liens" id="menu"><li><a href="index.html">Accueil</a></li><li><a href="methode.html">Mon approche</a></li><li><a href="offres.html">Boutique</a></li><li><a href="calculateur.html">Calculateur</a></li><li><a href="ressources.html">Ressources</a></li><li><a href="demo.html">Démo</a></li><li><a class="btn btn-plein" href="coaching.html#candidature">Candidater</a></li></ul>
+  </div>
+</header>
+<main id="contenu">
+<section class="page-tete">
+  <div class="wrap">
+    <h1>Merci, c'est validé.</h1>
+    <p data-merci-texte>Ton paiement est bien passé. Tu reçois ton reçu par e-mail dans quelques minutes.</p>
+  </div>
+</section>
+<section class="bloc">
+  <div class="wrap lisible">
+    <h2 style="margin-bottom:16px">La suite</h2>
+    <p data-merci-suite>Je t'envoie tes accès par e-mail sous 24 heures, à l'adresse utilisée pour le paiement. Rien reçu ? Regarde dans tes indésirables, puis écris-moi à <a href="mailto:thomasboulet.coaching@gmail.com">thomasboulet.coaching@gmail.com</a>.</p>
+    <p>Pendant ce temps, mesure ton point de départ : tes chiffres d'aujourd'hui serviront de référence pour la suite.</p>
+    <div class="actions"><a class="btn btn-plein" href="calculateur.html">Calculer mon 1RM</a><a class="btn btn-ligne" href="https://instagram.com/thomasboulet.coach" rel="noopener">Me suivre sur Instagram</a></div>
+  </div>
+</section>
+<script>
+(function(){
+  var id = (location.search.match(/[?&]offre=([\w-]+)/) || [])[1];
+  var suites = {
+    "app-autonomie": "Je crée ton accès à TB my Coach et je t'envoie le lien de connexion par e-mail sous 24 heures. Tu te connectes avec l'adresse utilisée pour le paiement.",
+    "cycle-force": "Je charge tes 24 semaines dans TB my Coach et je t'envoie le lien de connexion sous 24 heures. Prépare tes derniers chiffres sur les mouvements de base : ils serviront à calculer tes charges.",
+    "cycle-3h": "Je charge tes 24 semaines dans TB my Coach et je t'envoie le lien de connexion sous 24 heures."
+  };
+  document.addEventListener("DOMContentLoaded", function(){
+    var o = (window.CATALOGUE || []).filter(function(x){ return x.id === id; })[0];
+    if (o) document.querySelector("[data-merci-texte]").textContent = "Ton paiement pour « " + o.titre + " » est bien passé. Tu reçois ton reçu par e-mail dans quelques minutes.";
+    if (suites[id]) document.querySelector("[data-merci-suite]").firstChild.textContent = suites[id] + " Rien reçu ? Regarde dans tes indésirables, puis écris-moi à ";
+  });
+})();
+</script>
+</main>
+<footer class="pied">
+  <div class="wrap">
+    <div>
+      <b>Thomas Boulet Coaching</b>
+      <p>Coach sportif diplômé STAPS. En salle à Paris et en ligne, avec l'app TB my Coach.</p>
+      <p><a href="mailto:thomasboulet.coaching@gmail.com">thomasboulet.coaching@gmail.com</a></p>
+    </div>
+    <div>
+      <b>Le site</b>
+      <ul>
+        <li><a href="methode.html">Mon approche</a></li>
+        <li><a href="coaching.html">Le cycle de 12 semaines</a></li>
+        <li><a href="offres.html">La boutique</a></li>
+        <li><a href="calculateur.html">Calculateur de force</a></li>
+        <li><a href="ressources.html">Ressources gratuites</a></li>
+        <li><a href="concours.html">Concours Fondateurs</a></li><li><a href="demo.html">Essayer l'application</a></li>
+      </ul>
+    </div>
+    <div>
+      <b>Ailleurs</b>
+      <ul>
+        <li><a href="https://instagram.com/thomasboulet.coach" rel="noopener">Instagram</a></li>
+        <li><a href="https://calendly.com/thomboulet/30min" rel="noopener">Réserver un appel</a></li>
+        <li><a href="https://thomasbouletcoaching-lab.github.io/tb-coaching-app/">Espace clients (app)</a></li>
+      </ul>
+    </div>
+    <p class="bas">© <span data-annee>2026</span> Thomas Boulet EI. <a href="mentions-legales.html">Mentions légales</a>, <a href="https://thomasbouletcoaching-lab.github.io/tb-coaching-app/cgv.html">conditions de vente</a>, <a href="https://thomasbouletcoaching-lab.github.io/tb-coaching-app/confidentialite.html">confidentialité</a>.</p>
+  </div>
+</footer>
+<script src="produits.js"></script>
+<script src="site.js"></script>
+</body>
+</html>

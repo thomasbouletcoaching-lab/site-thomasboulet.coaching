@@ -10,7 +10,9 @@ L'app clients reste dans le dépôt `tb-coaching-app`.
 | `index.html` | Accueil : positionnement, différenciation, Méthode Charpente |
 | `methode.html` | Mon histoire, la méthode, l'app TB my Coach, mes engagements |
 | `coaching.html` | Page de vente du cycle de 12 semaines + formulaire de candidature |
-| `offres.html` | Catalogue de toutes les offres (généré depuis `produits.js`) |
+| `offres.html` | Boutique : les 4 niveaux d'offres (générée depuis `produits.js`) |
+| `calculateur.html`, `calcul.js` | Calculateur de force : 1RM, table RPE, délai pour un objectif, capture d'e-mail |
+| `merci.html` | Page affichée après un paiement Stripe (`?offre=<id>`) |
 | `ressources.html` | Guides gratuits (téléchargement contre e-mail) |
 | `mentions-legales.html` | Mentions légales (SIRET et adresse à compléter) |
 | `404.html` | Page d'erreur |
@@ -26,7 +28,8 @@ dans le champ `lien` et passer le `statut` à `"dispo"`.
 
 Candidatures, téléchargements du guide et inscriptions aux listes d'attente arrivent dans la table
 `leads` de Supabase (la même que l'app), avec dans `data` : `origine: "site"` et `demande`
-(`candidature`, `guide-3h` ou `attente` + l'offre concernée).
+(`candidature`, `guide-3h`, `calculateur` ou `attente` + l'offre concernée).
+Les demandes `calculateur` contiennent aussi `mouvement`, `e1rm`, `objectif` et `delai` : réponds-leur à la main sous 48 h, c'est la promesse affichée.
 
 ## Brancher le nom de domaine (thomasboulet-coaching.fr)
 
@@ -83,3 +86,32 @@ Tout se règle dans **`produits.js`**, en bas du fichier :
 Dans `produits.js`, `window.SITE.fondateur = { total: 10, prises: 0 }`.
 À chaque client qui paie le tarif fondateur, augmenter `prises` de 1 : le compteur de places se met à jour sur l'accueil et la page « Le cycle ».
 Quand `prises` atteint 10, le site affiche automatiquement le prix normal (1 600 €) partout.
+
+## La boutique (4 niveaux)
+
+| Niveau | Offres | Prix | Livraison |
+|---|---|---|---|
+| 1 · Commencer seul | Programme 3H, Programme Plateau (8 semaines), Pack Tableurs | 29 €, 29 €, 39 € | PDF + Google Sheets envoyés par e-mail |
+| 2 · App en autonomie | TB my Coach | 14,90 €/mois ou 119 €/an | Accès créé dans l'app |
+| 3 · Cycles 6 mois | Cycle 3H, Cycle Force (24 semaines) | 179 € | Programme chargé dans l'app, 6 mois d'accès inclus |
+| 4 · Coaching | Cycle Charpente 12 semaines, suivi mensuel | 790 → 1 600 €, 149 €/mois | Sur candidature |
+
+Règle de passage : le prix d'un cycle 6 mois acheté dans les 30 derniers jours est déduit du coaching Charpente (à appliquer à la main sur le lien de paiement envoyé).
+
+### Paiement et mode test
+
+Chaque offre payante a deux champs dans `produits.js` : `stripe` (lien réel) et `stripeTest` (lien de test).
+- `stripe` rempli → bouton d'achat visible par tout le monde.
+- `stripe` vide → le public voit « Bientôt en vente » et peut laisser son e-mail (liste d'attente).
+- Pour essayer la boutique toi-même : ajoute `?test=1` à l'adresse de la page Boutique. Les boutons mènent alors aux paiements de test (carte `4242 4242 4242 4242`, date future, n'importe quel code). `?test=0` pour sortir.
+
+Produits créés dans Stripe (mode test, compte « Thomas Boulet Transformation ») avec facture automatique et mention TVA non applicable. Après paiement, Stripe renvoie vers `merci.html?offre=<id>`.
+**Passage en réel** : recréer les mêmes produits et liens de paiement dans le compte Stripe en production (même redirection vers merci.html), puis coller chaque lien dans le champ `stripe` de l'offre.
+
+La livraison est manuelle pour l'instant : Stripe t'envoie un e-mail à chaque vente, tu envoies les fichiers ou crées l'accès dans l'app sous 24 h (c'est ce qu'annonce la page merci).
+
+## Calculateur
+
+`calculateur.html` : à mettre en lien dans la bio Instagram pour les contenus « tu stagnes ».
+Formules dans `calcul.js` (Epley, Brzycki, Lander, poids de corps ajouté pour tractions, dips et muscle-ups lestés ; table RPE de Tuchscherer).
+Selon le délai calculé, la page propose le Programme Plateau (≤ 8 semaines), le Cycle Force (≤ 24 semaines) ou le coaching.

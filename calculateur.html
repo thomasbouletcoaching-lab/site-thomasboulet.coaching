@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Calculateur de 1RM et RPE · Thomas Boulet</title>
+<meta name="description" content="Calcule ton 1RM estimé (squat, développé couché, soulevé de terre, tractions et dips lestés), ta table RPE et le délai réaliste pour atteindre ton objectif.">
+<link rel="canonical" href="https://thomasbouletcoaching-lab.github.io/thomasboulet-coaching/calculateur.html">
+<meta property="og:url" content="https://thomasbouletcoaching-lab.github.io/thomasboulet-coaching/calculateur.html">
+<meta name="theme-color" content="#0B1426">
+<link rel="icon" href="favicon.ico"><link rel="icon" type="image/png" href="favicon-clair.png" media="(prefers-color-scheme: light)"><link rel="icon" type="image/png" href="favicon-sombre.png" media="(prefers-color-scheme: dark)">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="Calculateur de 1RM et RPE · Thomas Boulet">
+<meta property="og:description" content="Ton 1RM estimé, ta table RPE et combien de semaines pour atteindre ton objectif. Gratuit.">
+<meta property="og:image" content="https://thomasbouletcoaching-lab.github.io/thomasboulet-coaching/img/partage.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="saut" href="#contenu">Aller au contenu</a>
+<header class="nav">
+  <div class="wrap">
+    <a class="marque" href="index.html"><img src="img/logo.png" alt="" width="36" height="36">Thomas Boulet</a>
+    <button class="burger" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
+    <ul class="liens" id="menu"><li><a href="index.html">Accueil</a></li><li><a href="methode.html">Mon approche</a></li><li><a href="offres.html">Boutique</a></li><li><a href="calculateur.html" aria-current="page">Calculateur</a></li><li><a href="ressources.html">Ressources</a></li><li><a href="demo.html">Démo</a></li><li><a class="btn btn-plein" href="coaching.html#candidature">Candidater</a></li></ul>
+  </div>
+</header>
+<main id="contenu">
+<section class="page-tete">
+  <div class="wrap">
+    <h1>Calculateur de force</h1>
+    <p>Ton 1RM estimé, tes charges de travail à chaque RPE, et le délai réaliste pour passer le cap que tu vises. Squat, développé couché, soulevé de terre, tractions et dips lestés.</p>
+  </div>
+</section>
+
+<section class="bloc" style="padding-bottom:0">
+  <div class="wrap calc">
+    <div class="calc-etape"><span>1</span><h2>Ton 1RM estimé</h2></div>
+    <form class="form calc-form" data-calc novalidate onsubmit="return false">
+      <label>Mouvement
+        <select name="mouvement">
+          <option value="squat">Squat</option>
+          <option value="developpe-couche">Développé couché</option>
+          <option value="souleve-de-terre">Soulevé de terre</option>
+          <option value="developpe-militaire">Développé militaire</option>
+          <option value="tractions-lestees" data-leste="1">Tractions lestées</option>
+          <option value="dips-lestes" data-leste="1">Dips lestés</option>
+          <option value="muscle-up-leste" data-leste="1">Muscle-up lesté</option>
+          <option value="autre">Autre mouvement à la barre</option>
+        </select>
+      </label>
+      <div class="deux">
+        <label><span data-libelle-charge>Charge (kg)</span><input name="charge" inputmode="decimal" placeholder="100" autocomplete="off"></label>
+        <label>Reps réalisées<input name="reps" inputmode="numeric" placeholder="5" autocomplete="off"></label>
+      </div>
+      <div class="deux">
+        <label>Reps en réserve
+          <select name="rir">
+            <option value="0">0 · échec ou presque</option>
+            <option value="1">1 rep en réserve</option>
+            <option value="2">2 reps en réserve</option>
+            <option value="3">3 reps en réserve</option>
+            <option value="4">4 reps ou plus</option>
+          </select>
+        </label>
+        <label data-pdc hidden>Poids de corps (kg)<input name="pdc" inputmode="decimal" placeholder="80" autocomplete="off"></label>
+      </div>
+      <p class="aide" style="margin:12px 0 0">Charge : barre comprise. Pour les mouvements lestés, indique seulement le lest à la ceinture.</p>
+    </form>
+    <div class="calc-sortie" aria-live="polite">
+      <p class="calc-label">1RM estimé</p>
+      <p class="calc-chiffre" data-resultat>—</p>
+      <p class="calc-detail" data-detail>Renseigne tes reps et ta charge.</p>
+    </div>
+  </div>
+</section>
+
+<section class="bloc" style="padding-bottom:0">
+  <div class="wrap">
+    <div class="calc-etape"><span>2</span><h2>Tes charges de travail</h2></div>
+    <p class="intro" style="margin-bottom:20px">Le RPE mesure l'effort : RPE 8 = il te restait 2 reps. Trouve le nombre de reps de ta série, puis l'effort voulu. Pour les mouvements lestés, les valeurs sont le lest (négatif = assistance).</p>
+    <div class="calc-table" data-table-rpe></div>
+  </div>
+</section>
+
+<section class="bloc">
+  <div class="wrap calc">
+    <div class="calc-etape"><span>3</span><h2>Ton objectif</h2></div>
+    <form class="form calc-form" novalidate onsubmit="return false">
+      <p style="margin:0;font-weight:600">Je veux faire…</p>
+      <div class="deux">
+        <label>Reps<input name="obj_reps" inputmode="numeric" placeholder="10" autocomplete="off"></label>
+        <label><span data-libelle-charge>Charge (kg)</span><input name="obj_charge" inputmode="decimal" placeholder="100" autocomplete="off"></label>
+      </div>
+      <label>Depuis combien de temps tu t'entraînes sérieusement ?
+        <select name="niveau">
+          <option value="debutant">Moins d'un an</option>
+          <option value="intermediaire" selected>1 à 3 ans</option>
+          <option value="confirme">Plus de 3 ans</option>
+        </select>
+      </label>
+    </form>
+    <div class="calc-sortie" aria-live="polite">
+      <p class="calc-label">Délai estimé</p>
+      <div data-objectif></div>
+      <div class="calc-cta" data-objectif-cta hidden>
+        <b data-cta-titre></b>
+        <p data-cta-texte></p>
+        <a class="btn btn-plein" data-cta-lien href="offres.html"></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bloc bloc-blanc">
+  <div class="wrap duo">
+    <div class="lisible">
+      <h2 style="margin-bottom:16px">Reçois ton plan pour y arriver</h2>
+      <p class="intro">Laisse ton e-mail : je regarde tes chiffres moi-même et je te réponds avec les deux ou trois leviers qui feront bouger ta barre. Gratuit, sans engagement.</p>
+    </div>
+    <form class="form" data-lead="calculateur" data-merci="C'est noté{p}. Je regarde tes chiffres et je te réponds par e-mail sous 48 h." novalidate>
+      <div class="deux">
+        <label>Prénom<input name="name" required maxlength="80" autocomplete="given-name"></label>
+        <label>E-mail<input name="email" type="email" required maxlength="200" autocomplete="email"></label>
+      </div>
+      <input type="hidden" name="mouvement"><input type="hidden" name="e1rm"><input type="hidden" name="objectif"><input type="hidden" name="delai">
+      <div class="pot" aria-hidden="true"><label>Ne pas remplir<input name="site_web" tabindex="-1" autocomplete="off"></label></div>
+      <label class="accord"><input type="checkbox" name="consent" required><span>J'accepte d'être recontacté par e-mail par Thomas Boulet EI. Je peux me désinscrire à tout moment. Détails dans la <a href="https://thomasbouletcoaching-lab.github.io/tb-coaching-app/confidentialite.html">politique de confidentialité</a>.</span></label>
+      <div class="actions" style="margin-top:18px"><button class="btn btn-plein" type="submit">Recevoir mon plan</button></div>
+      <div class="retour" role="status" aria-live="polite"></div>
+    </form>
+  </div>
+</section>
+
+<section class="bloc">
+  <div class="wrap lisible">
+    <h2 style="margin-bottom:16px">Comment c'est calculé</h2>
+    <p>Le 1RM est la moyenne de trois formules reconnues (Epley, Brzycki, Lander), appliquées à la charge totale déplacée : pour les tractions, dips et muscle-ups, ton poids de corps est ajouté au lest. Les reps en réserve sont comptées comme des reps faites, car une série à 2 reps de l'échec ne dit pas la même chose qu'une série à l'échec.</p>
+    <p>La table RPE reprend les pourcentages de Mike Tuchscherer. Le délai suppose un programme structuré et une progression qui ralentit avec le temps : environ 3 % de 1RM par mois la première année, 1,5 % entre 1 et 3 ans, 0,75 % au-delà. Ce sont des estimations : seule une vraie séance tranche.</p>
+  </div>
+</section>
+</main>
+<footer class="pied">
+  <div class="wrap">
+    <div>
+      <b>Thomas Boulet Coaching</b>
+      <p>Coach sportif diplômé STAPS. En salle à Paris et en ligne, avec l'app TB my Coach.</p>
+      <p><a href="mailto:thomasboulet.coaching@gmail.com">thomasboulet.coaching@gmail.com</a></p>
+    </div>
+    <div>
+      <b>Le site</b>
+      <ul>
+        <li><a href="methode.html">Mon approche</a></li>
+        <li><a href="coaching.html">Le cycle de 12 semaines</a></li>
+        <li><a href="offres.html">La boutique</a></li>
+        <li><a href="calculateur.html">Calculateur de force</a></li>
+        <li><a href="ressources.html">Ressources gratuites</a></li>
+        <li><a href="concours.html">Concours Fondateurs</a></li><li><a href="demo.html">Essayer l'application</a></li>
+      </ul>
+    </div>
+    <div>
+      <b>Ailleurs</b>
+      <ul>
+        <li><a href="https://instagram.com/thomasboulet.coach" rel="noopener">Instagram</a></li>
+        <li><a href="https://calendly.com/thomboulet/30min" rel="noopener">Réserver un appel</a></li>
+        <li><a href="https://thomasbouletcoaching-lab.github.io/tb-coaching-app/">Espace clients (app)</a></li>
+      </ul>
+    </div>
+    <p class="bas">© <span data-annee>2026</span> Thomas Boulet EI. <a href="mentions-legales.html">Mentions légales</a>, <a href="https://thomasbouletcoaching-lab.github.io/tb-coaching-app/cgv.html">conditions de vente</a>, <a href="https://thomasbouletcoaching-lab.github.io/tb-coaching-app/confidentialite.html">confidentialité</a>.</p>
+  </div>
+</footer>
+<script src="produits.js"></script>
+<script src="calcul.js"></script>
+<script src="site.js"></script>
+</body>
+</html>

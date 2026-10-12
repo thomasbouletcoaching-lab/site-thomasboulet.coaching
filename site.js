@@ -103,7 +103,7 @@
       }
       if (f.elements.consent && !f.elements.consent.checked) return dire(out, "ko", "Coche la case d'accord pour que je puisse te répondre.");
       var data = { origine: "site", demande: type, page: location.pathname.split("/").pop() || "index.html" };
-      ["age","goal","practice","sessions","place","constraints","source"].forEach(function(k){ if (v[k]) data[k] = v[k]; });
+      ["age","goal","practice","sessions","place","constraints","source","mouvement","e1rm","objectif","delai","offre"].forEach(function(k){ if (v[k]) data[k] = v[k]; });
       if (btn) { btn.disabled = true; btn.textContent = "Envoi…"; }
       envoyer({ name: name || (v.email.split("@")[0]), email: v.email, phone: v.phone || null, data: data, consent: true })
         .then(function(){
@@ -134,18 +134,34 @@
 
   // Page Offres : construite à partir de produits.js
   var cible = $("[data-catalogue]");
+  // Paiement : lien Stripe réel (champ « stripe ») si présent, sinon lien de test visible
+  // uniquement avec ?test=1 dans l'adresse, sinon liste d'attente « bientôt en vente ».
+  var TEST = false;
+  try { if (/[?&]test=1/.test(location.search)) sessionStorage.setItem("tb-test", "1"); if (/[?&]test=0/.test(location.search)) sessionStorage.removeItem("tb-test"); TEST = sessionStorage.getItem("tb-test") === "1"; } catch (e) { TEST = /[?&]test=1/.test(location.search); }
+  if (window.CATALOGUE) window.CATALOGUE.forEach(function(o){
+    var achats = o.options || ((o.stripe !== undefined || o.stripeTest !== undefined) ? [{ label: o.bouton, stripe: o.stripe, stripeTest: o.stripeTest }] : null);
+    if (!achats) return;
+    var live = achats.filter(function(a){ return a.stripe; }), test = TEST ? achats.filter(function(a){ return a.stripeTest; }) : [];
+    if (live.length) { o.statut = "dispo"; o.boutons = live.map(function(a){ return { texte: a.label, lien: a.stripe }; }); }
+    else if (test.length) { o.statut = "test"; o.boutons = test.map(function(a){ return { texte: a.label + " (test)", lien: a.stripeTest }; }); }
+    else { o.statut = "prevente"; o.lien = ""; o.bouton = "Être prévenu de l'ouverture"; }
+  });
+  var bandeau = $("[data-mode-test]"); if (bandeau) bandeau.hidden = !TEST;
+
   if (cible && window.CATALOGUE) {
-    var statuts = { dispo: "Disponible", attente: "Liste d'attente", bientot: "En préparation" };
+    var statuts = { dispo: "Disponible", attente: "Liste d'attente", prevente: "Bientôt en vente", bientot: "En préparation", test: "Mode test" };
     var html = "";
     Object.keys(window.FAMILLES).forEach(function(fam){
       var items = window.CATALOGUE.filter(function(o){ return o.famille === fam; });
       if (!items.length) return;
       var F = window.FAMILLES[fam];
-      html += '<h2 class="famille" id="' + fam + '">' + esc(F.titre) + '</h2><p class="intro" style="margin-bottom:24px">' + esc(F.intro) + '</p><div class="offres">';
+      html += (F.niveau ? '<p class="niveau" id="' + fam + '">' + esc(F.niveau) + '</p><h2 class="famille">' : '<h2 class="famille" id="' + fam + '">') + esc(F.titre) + '</h2><p class="intro" style="margin-bottom:24px">' + esc(F.intro) + '</p><div class="offres">';
       items.sort(function(a, b){ return (b.phare ? 1 : 0) - (a.phare ? 1 : 0); }).forEach(function(o){
         var pts = (o.points || []).map(function(p){ return "<li>" + esc(p) + "</li>"; }).join("");
         var action;
-        if (o.lien) {
+        if (o.boutons) {
+          action = '<div class="achats">' + o.boutons.map(function(b, i){ return '<a class="btn ' + (o.phare || i === 0 ? "btn-plein" : "btn-ligne") + '" href="' + esc(b.lien) + '" rel="noopener">' + esc(b.texte) + "</a>"; }).join("") + "</div>";
+        } else if (o.lien) {
           action = '<a class="btn ' + (o.phare ? "btn-plein" : "btn-ligne") + '" href="' + esc(o.lien) + '">' + esc(o.bouton) + "</a>";
         } else {
           action = '<button type="button" class="btn btn-ligne" data-ouvre="' + esc(o.id) + '">' + esc(o.bouton) + "</button>" +
@@ -156,7 +172,7 @@
             '<p class="aide" style="flex-basis:100%;margin:0;font-size:.85rem;color:var(--gris)">Un seul e-mail à l\'ouverture. Données traitées selon la <a href="' + CONFIDENTIALITE + '">politique de confidentialité</a>.</p>' +
             '<div class="retour" role="status" aria-live="polite" style="flex-basis:100%"></div></form>';
         }
-        var corps = '<span class="statut ' + (o.statut === "dispo" ? "dispo" : "") + '">' + statuts[o.statut] + "</span>" +
+        var corps = '<span class="statut ' + (o.statut === "dispo" ? "dispo" : "") + '">' + statuts[o.statut] + "</span>" + (o.pour ? '<p class="pour">' + esc(o.pour) + "</p>" : "") +
           "<h3>" + esc(o.titre) + '</h3><p class="desc">' + esc(o.desc) + "</p>" + (pts ? "<ul>" + pts + "</ul>" : "");
         var prix = (o.prix ? '<p class="prix">' + esc(o.prix) + (o.prixBarre ? ' <s class="prix-barre">' + esc(o.prixBarre) + "</s>" : "") + "</p>" : "") + (o.note ? '<p class="note">' + esc(o.note) + "</p>" : "");
         html += o.phare

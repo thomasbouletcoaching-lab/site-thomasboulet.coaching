@@ -372,3 +372,53 @@ p{margin:0 0 1em}
 .page-tete{background:var(--nuit);color:#fff;padding:clamp(48px,7vw,80px) 0 clamp(40px,6vw,64px)}
 .page-tete h1{font-size:clamp(2.6rem,7vw,4.4rem)}
 .page-tete p{color:#C9D3E3;font-size:1.18rem;max-width:56ch;margin:18px 0 0}
+
+/* Calculateur de force */
+.calc{display:grid;grid-template-columns:1.1fr .9fr;gap:20px 32px;align-items:start}
+.calc .calc-etape{grid-column:1/-1}
+.calc-etape{display:flex;align-items:center;gap:14px;margin-bottom:20px}
+.calc-etape span{display:inline-grid;place-items:center;width:40px;height:40px;border-radius:10px;background:var(--nuit);color:var(--cyan);font-family:var(--titre);font-weight:700;font-size:1.4rem;flex:0 0 auto}
+.calc-etape h2{font-size:clamp(1.8rem,4vw,2.4rem)}
+.calc-form{max-width:none}
+.calc-sortie{background:var(--nuit);color:#C9D3E3;border-radius:16px;padding:clamp(20px,4vw,32px);position:sticky;top:84px}
+.calc-label{margin:0;color:var(--acier);font-size:.9rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+.calc-chiffre{margin:6px 0 10px;font-family:var(--titre);font-weight:700;font-size:clamp(3rem,9vw,4.6rem);line-height:1;color:#fff;font-variant-numeric:tabular-nums}
+.calc-detail{margin:0;font-size:.95rem}
+.calc-alerte{color:#FFC27A}
+.calc-gros{margin:6px 0 10px;font-family:var(--titre);font-weight:700;font-size:clamp(2.4rem,7vw,3.4rem);line-height:1;color:#fff}
+.calc-sortie .aide{color:var(--acier);margin:8px 0 0}
+.calc-cta{border-top:1px solid var(--trait-nuit);margin-top:18px;padding-top:18px}
+.calc-cta b{display:block;color:#fff;font-family:var(--titre);font-size:1.4rem}
+.calc-cta p{margin:6px 0 14px;font-size:.95rem}
+.calc-table{overflow-x:auto;-webkit-overflow-scrolling:touch;background:var(--papier);border:1px solid var(--trait);border-radius:14px}
+.calc-table table{border-collapse:collapse;width:100%;min-width:560px;font-variant-numeric:tabular-nums;font-size:.95rem}
+.calc-table th,.calc-table td{padding:10px 8px;text-align:center;border-bottom:1px solid var(--trait)}
+.calc-table thead th{background:var(--nuit);color:#fff;font-family:var(--titre);font-size:1.05rem;position:sticky;top:0}
+.calc-table tbody th{color:var(--gris);background:var(--craie)}
+.calc-table tbody tr:nth-child(even) td{background:#F7F9FC}
+.calc-table tbody tr:last-child th,.calc-table tbody tr:last-child td{border-bottom:0}
+.calc-table .aide{padding:16px;margin:0;color:var(--gris)}
+@media (max-width:820px){.calc{grid-template-columns:1fr}.calc-sortie{position:static}}
+
+/* Boutique */
+.portes{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.porte{background:var(--papier);border:1px solid var(--trait);border-radius:16px;padding:clamp(20px,3vw,32px);display:flex;flex-direction:column}
+.porte h3{font-size:1.6rem;margin:4px 0 10px}
+.porte p{color:var(--gris);margin:0 0 12px}
+.porte ul{margin:0 0 20px;padding-left:18px}
+.porte .btn{align-self:flex-start;margin-top:auto}
+.niveau{margin:0;font-size:.85rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--bleu-fonce)}
+p.niveau + .famille{margin-top:6px}
+p.niveau{margin-top:48px}
+p.niveau:first-child{margin-top:0}
+.offre .pour{margin:-6px 0 8px;font-size:.9rem;font-weight:600;color:var(--bleu-fonce)}
+.offre.phare .pour{color:var(--cyan)}
+.achats{display:flex;flex-wrap:wrap;gap:10px}
+.echelle{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:28px}
+.echelle a{display:flex;flex-direction:column;gap:2px;padding:14px 16px;border-radius:12px;background:var(--nuit);color:#fff;text-decoration:none;border-top:4px solid var(--nuit-3)}
+.echelle a:nth-child(2){border-top-color:#2E5FB8}.echelle a:nth-child(3){border-top-color:var(--bleu)}.echelle a:nth-child(4){border-top-color:var(--cyan)}
+.echelle a:hover{color:#fff;background:var(--nuit-2)}
+.echelle b{font-family:var(--titre);font-size:1.2rem}
+.echelle span{color:var(--acier);font-size:.9rem}
+.bandeau-test{background:#FFF4E0;border-bottom:1px solid #F0C98A;color:#6B4A0F;padding:10px 0;font-size:.95rem}
+@media (max-width:760px){.portes{grid-template-columns:1fr}.echelle{grid-template-columns:1fr 1fr}}
