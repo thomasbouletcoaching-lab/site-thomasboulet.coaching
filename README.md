@@ -7,10 +7,11 @@ L'app clients reste dans le dépôt `tb-coaching-app`.
 
 | Fichier | Rôle |
 |---|---|
-| `index.html` | Accueil : positionnement, différenciation, Méthode Charpente |
+| `index.html` | Accueil : deux profils (actifs occupés, pratiquants qui stagnent), méthode, app, preuves, formules, FAQ, données structurées |
+| `app.html` | Présentation de l'app TB my Coach : fonctions, différences, Gratuit / Premium, installation, données |
 | `methode.html` | Mon histoire, la méthode, l'app TB my Coach, mes engagements |
 | `coaching.html` | Page de vente du cycle de 12 semaines + formulaire de candidature |
-| `offres.html` | Boutique : les 4 niveaux d'offres (générée depuis `produits.js`) |
+| `offres.html` | Toutes les offres (générée depuis `produits.js`) |
 | `calculateur.html`, `calcul.js` | Calculateur de force : 1RM, table RPE, délai pour un objectif, capture d'e-mail |
 | `merci.html` | Page affichée après un paiement Stripe (`?offre=<id>`) |
 | `ressources.html` | Guides gratuits (téléchargement contre e-mail) |
@@ -69,7 +70,7 @@ L'en-tête et le pied de page sont répétés dans chaque page : un changement d
 
 Produit « Cycle Charpente – coaching 12 semaines » à 1 600 € créé dans Stripe, avec un lien de paiement
 (facture automatique, mention « TVA non applicable, art. 293 B du CGI »).
-Tarif fondateur : prix à 790 € sur le même produit, avec un lien de paiement **limité à 10 ventes** (Stripe le désactive tout seul après la 10e).
+Tarif fondateur (790 €) : retiré en octobre 2026 ; le lien de paiement de test associé ne doit plus être utilisé.
 Liens en mode test : 790 € https://buy.stripe.com/test_4gMbJ0axh4dy7hr3ML7Vm01 · 1 600 € https://buy.stripe.com/test_8x200ieNxcK41X75UT7Vm00
 Ils sont **en mode test** : ils ne sont pas affichés sur le site. Le parcours reste candidature → appel → envoi du lien.
 Quand le compte Stripe sera en production, recréer le lien en mode réel ; il pourra alors aller dans
@@ -81,20 +82,18 @@ Tout se règle dans **`produits.js`**, en bas du fichier :
 - `window.SITE.vsl` : coller le lien YouTube (ou Vimeo, ou `video/vsl.mp4`). Le bloc vidéo apparaît en haut de la page « Le cycle ». Vide = caché.
 - `window.RESULTATS` : ajouter un bloc par client (modèle dans le fichier). La section « Ils l'ont fait » apparaît sur l'accueil et sur la page « Le cycle » dès qu'il y a un résultat. Uniquement des résultats réels, avec l'accord écrit du client.
 
-## Tarif fondateur (790 € pour les 10 premières places)
+## Les offres
 
-Dans `produits.js`, `window.SITE.fondateur = { total: 10, prises: 0 }`.
-À chaque client qui paie le tarif fondateur, augmenter `prises` de 1 : le compteur de places se met à jour sur l'accueil et la page « Le cycle ».
-Quand `prises` atteint 10, le site affiche automatiquement le prix normal (1 600 €) partout.
+| Formule | Prix | Où ça se passe |
+|---|---|---|
+| TB my Coach Gratuit | 0 € | Inscription dans l'app |
+| TB my Coach Premium | 9,99 €/mois ou 59,99 €/an, 7 jours d'essai | Paiement Stripe dans l'app |
+| Coaching léger | 89 €/mois, sans engagement | Paiement Stripe dans l'app |
+| Coaching 12 semaines (cycle Charpente) | 540 €/mois × 3 (1 620 €) | Sur candidature |
+| Programmes à l'unité | 29 €, 39 €, cycles 6 mois 179 € (6 mois de Premium inclus) | Liens Stripe dans `produits.js` |
 
-## La boutique (4 niveaux)
-
-| Niveau | Offres | Prix | Livraison |
-|---|---|---|---|
-| 1 · Commencer seul | Programme 3H, Programme Plateau (8 semaines), Pack Tableurs | 29 €, 29 €, 39 € | PDF + Google Sheets envoyés par e-mail |
-| 2 · App en autonomie | TB my Coach | 14,90 €/mois ou 119 €/an | Accès créé dans l'app |
-| 3 · Cycles 6 mois | Cycle 3H, Cycle Force (24 semaines) | 179 € | Programme chargé dans l'app, 6 mois d'accès inclus |
-| 4 · Coaching | Cycle Charpente 12 semaines, suivi mensuel | 790 → 1 600 €, 149 €/mois | Sur candidature |
+Adresse du site : https://thomasbouletcoaching-lab.github.io/site-thomasboulet.coaching/ (c'est elle qui figure dans les balises canonical, le sitemap et robots.txt).
+Captures de l'app (`img/app-*.webp`) : profil fictif « Julien », aucune donnée client.
 
 Règle de passage : le prix d'un cycle 6 mois acheté dans les 30 derniers jours est déduit du coaching Charpente (à appliquer à la main sur le lien de paiement envoyé).
 

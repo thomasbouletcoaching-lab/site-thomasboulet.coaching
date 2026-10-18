@@ -422,3 +422,86 @@ p.niveau:first-child{margin-top:0}
 .echelle span{color:var(--acier);font-size:.9rem}
 .bandeau-test{background:#FFF4E0;border-bottom:1px solid #F0C98A;color:#6B4A0F;padding:10px 0;font-size:.95rem}
 @media (max-width:760px){.portes{grid-template-columns:1fr}.echelle{grid-template-columns:1fr 1fr}}
+
+/* ===== Refonte 2026-10 : profils, preuves, app, formules ===== */
+.surtitre{display:inline-block;font-family:var(--titre);font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:.95rem;color:var(--cyan);margin-bottom:14px}
+.bloc-blanc .surtitre,.bloc:not(.bloc-nuit) .surtitre{color:var(--bleu-fonce)}
+.hero .surtitre{color:var(--cyan)}
+.profils{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.profil{background:var(--papier);border:1px solid var(--trait);border-radius:16px;padding:28px;display:flex;flex-direction:column}
+.profil .qui{font-family:var(--titre);font-weight:700;font-size:1.05rem;letter-spacing:.06em;text-transform:uppercase;color:var(--bleu-fonce);margin-bottom:8px}
+.profil h3{font-size:1.9rem;margin-bottom:14px}
+.profil ul{list-style:none;padding:0;margin:0 0 18px}
+.profil li{padding:8px 0 8px 28px;position:relative;color:var(--gris);border-bottom:1px solid var(--trait)}
+.profil li::before{content:"";position:absolute;left:4px;top:17px;width:10px;height:10px;border-radius:3px;background:var(--bleu)}
+.profil .reponse{background:var(--craie);border-radius:12px;padding:14px 16px;margin:auto 0 18px;font-size:.98rem}
+.profil .reponse b{display:block;font-family:var(--titre);font-size:1.15rem;margin-bottom:2px}
+.profil .btn{align-self:flex-start}
+@media (max-width:820px){.profils{grid-template-columns:1fr}}
+
+.principes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:8px}
+.principe{border:1px solid var(--trait-nuit);border-radius:14px;padding:22px;background:var(--nuit-2)}
+.principe .n{font-family:var(--titre);font-weight:700;color:var(--cyan);font-size:1rem;letter-spacing:.06em}
+.principe h3{font-size:1.4rem;margin:6px 0 8px;color:#fff}
+.principe p{color:var(--acier);margin:0;font-size:.98rem}
+@media (max-width:900px){.principes{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.principes{grid-template-columns:1fr}}
+.honnete{margin-top:26px;border-left:3px solid var(--cyan);padding:6px 0 6px 18px;color:var(--acier);max-width:70ch}
+
+.confiance{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;list-style:none;padding:0;margin:0}
+.confiance li{background:var(--papier);border:1px solid var(--trait);border-radius:14px;padding:18px}
+.confiance b{display:block;font-family:var(--titre);font-size:1.7rem;line-height:1.05;margin-bottom:4px}
+.confiance span{color:var(--gris);font-size:.93rem}
+@media (max-width:900px){.confiance{grid-template-columns:1fr 1fr}}
+
+.appli{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:40px;align-items:center}
+.appli .ecrans{display:flex;gap:14px;justify-content:center}
+.appli .ecrans img{width:48%;max-width:250px;border-radius:26px;border:6px solid #000;box-shadow:0 18px 50px rgba(0,0,0,.45);background:#000}
+.appli .ecrans img:nth-child(2){margin-top:40px}
+@media (max-width:860px){.appli{grid-template-columns:1fr}.appli .ecrans{order:-1}}
+.fonctions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 28px;list-style:none;padding:0;margin:18px 0 24px}
+.fonctions li{padding-left:30px;position:relative}
+.fonctions li::before{content:"✓";position:absolute;left:0;top:0;font-weight:700;color:var(--cyan)}
+.bloc:not(.bloc-nuit) .fonctions li::before{color:var(--ok)}
+.fonctions b{display:block}
+.fonctions span{color:var(--acier);font-size:.95rem}
+.bloc:not(.bloc-nuit) .fonctions span{color:var(--gris)}
+@media (max-width:640px){.fonctions{grid-template-columns:1fr}}
+
+.formules{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;align-items:stretch}
+.formule{background:var(--papier);border:1px solid var(--trait);border-radius:16px;padding:22px;display:flex;flex-direction:column;position:relative}
+.formule.mise{border:2px solid var(--bleu);box-shadow:0 14px 40px rgba(61,123,242,.18)}
+.formule .badge{position:absolute;top:-12px;left:20px;background:var(--bleu);color:#fff;font-size:.78rem;font-weight:600;padding:3px 10px;border-radius:999px}
+.formule h3{font-size:1.6rem;margin-bottom:4px}
+.formule .pour{color:var(--gris);font-size:.93rem;min-height:2.9em;margin-bottom:10px}
+.formule .prix{font-family:var(--titre);font-weight:700;font-size:2.3rem;line-height:1;margin:0}
+.formule .prix small{font-size:.5em;color:var(--gris);font-weight:600}
+.formule .sous-prix{font-size:.85rem;color:var(--gris);margin:4px 0 14px;min-height:2.6em}
+.formule ul{padding-left:18px;margin:0 0 18px;color:var(--encre);font-size:.95rem}
+.formule li{margin:5px 0}
+.formule .btn{margin-top:auto;text-align:center}
+@media (max-width:1060px){.formules{grid-template-columns:1fr 1fr}}
+@media (max-width:600px){.formules{grid-template-columns:1fr}.formule .pour,.formule .sous-prix{min-height:0}}
+.legal-prix{font-size:.85rem;color:var(--gris);margin-top:16px}
+
+.compare{width:100%;border-collapse:collapse;background:var(--papier);border-radius:14px;overflow:hidden;font-size:.97rem}
+.compare th,.compare td{padding:12px 14px;border-bottom:1px solid var(--trait);text-align:left;vertical-align:top}
+.compare thead th{background:var(--nuit);color:#fff;font-family:var(--titre);font-size:1.1rem;letter-spacing:.02em}
+.compare td:first-child{font-weight:600;width:30%}
+.compare .non{color:var(--gris)}
+.compare .oui{color:var(--encre)}
+.compare .oui::before{content:"✓ ";color:var(--ok);font-weight:700}
+.defile{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:14px;border:1px solid var(--trait)}
+.defile .compare{min-width:640px}
+.etapes{counter-reset:e;list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.etapes li{counter-increment:e;background:var(--papier);border:1px solid var(--trait);border-radius:14px;padding:20px 20px 20px 66px;position:relative}
+.etapes li::before{content:counter(e);position:absolute;left:18px;top:18px;width:34px;height:34px;border-radius:50%;background:var(--bleu);color:#fff;font-family:var(--titre);font-weight:700;font-size:1.2rem;display:grid;place-items:center}
+.etapes b{display:block;margin-bottom:2px}
+.etapes span{color:var(--gris);font-size:.95rem}
+@media (max-width:860px){.etapes{grid-template-columns:1fr}}
+.cta-final{text-align:center}
+.cta-final .actions{justify-content:center}
+.cta-final h2{margin-bottom:12px}
+.liens a,.marque{white-space:nowrap}
+.formule .badge{white-space:nowrap}
+.formule.mise{padding-top:30px}

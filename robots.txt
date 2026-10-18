@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://thomasbouletcoaching-lab.github.io/thomasboulet-coaching/sitemap.xml
+Sitemap: https://thomasbouletcoaching-lab.github.io/site-thomasboulet.coaching/sitemap.xml

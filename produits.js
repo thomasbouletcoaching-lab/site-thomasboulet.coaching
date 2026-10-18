@@ -32,28 +32,28 @@ window.CATALOGUE = [
       "Une séance offerte avec moi en salle à Paris",
       "Le prix d'un cycle 6 mois acheté dans les 30 jours précédents est déduit"
     ],
-    prix: "790\u00a0€",
-    prixApres: "1\u00a0600\u00a0€",
-    note: "Tarif de lancement jusqu'au 31 décembre 2026 (10 places au maximum). 1 600 € à partir de 2027. TVA non applicable, art. 293 B du CGI.",
+    prix: "540\u00a0€ / mois",
+    note: "3 mensualités, soit 1 620 € au total. Sur candidature. TVA non applicable, art. 293 B du CGI.",
     bouton: "Voir le cycle en détail",
     lien: "coaching.html"
   },
   {
-    id: "suivi-mensuel",
+    id: "coaching-leger",
     famille: "accompagnement",
-    titre: "Le suivi mensuel",
-    statut: "attente",
-    pour: "Après un cycle Charpente",
-    desc: "Pour continuer sur ta lancée : ton programme continue d'être ajusté par moi, mois par mois, sans engagement.",
+    titre: "Le coaching léger",
+    statut: "dispo",
+    pour: "Être guidé, sans engagement",
+    desc: "Je construis et j'ajuste ton programme et ton plan dans l'app, tu m'écris quand tu en as besoin. Idéal après un cycle, ou pour démarrer accompagné à moindre coût.",
     points: [
-      "Programme ajusté chaque mois dans l'app",
-      "Bilan mensuel commenté",
-      "Messagerie"
+      "Tout ce que contient Premium",
+      "Programme et plan alimentaire construits et ajustés par moi",
+      "Messagerie avec moi dans l'app",
+      "Un bilan régulier de ta progression"
     ],
-    prix: "149\u00a0€ / mois",
-    note: "Réservé aux clients qui ont fait un cycle. Sans engagement.",
-    bouton: "Être prévenu de l'ouverture",
-    lien: ""
+    prix: "89\u00a0€ / mois",
+    note: "Sans engagement, résiliable chaque mois depuis l'app. TVA non applicable, art. 293 B du CGI.",
+    bouton: "Choisir dans l'app",
+    lien: "https://thomasbouletcoaching-lab.github.io/tb-coaching-app/"
   },
 
   /* ---------- NIVEAU 3 : LES CYCLES 6 MOIS ---------- */
@@ -66,13 +66,12 @@ window.CATALOGUE = [
     points: [
       "24 semaines de séances écrites, 4 séances par semaine",
       "Charges calculées depuis ton 1RM, en RPE",
-      "Livré dans l'app TB my Coach : 6 mois d'accès inclus",
+      "Livré dans l'app TB my Coach : 6 mois de Premium inclus",
       "Tests de force aux semaines 8, 16 et 24",
       "Déduit du coaching Charpente si tu passes au suivi dans les 30 jours"
     ],
     prix: "179\u00a0€",
-    prixBarre: "268\u00a0€",
-    note: "Paiement unique. Valeur : programme + 6 mois d'app (89 €). TVA non applicable, art. 293 B du CGI.",
+    note: "Paiement unique. Inclut 6 mois de TB my Coach Premium. TVA non applicable, art. 293 B du CGI.",
     bouton: "Acheter le cycle",
     stripe: "",
     stripeTest: "https://buy.stripe.com/test_3cI5kC20L39u31b6YX7Vm07"
@@ -82,17 +81,16 @@ window.CATALOGUE = [
     famille: "cycles",
     titre: "Cycle 3H, 24 semaines",
     pour: "Tu as peu de temps",
-    desc: "Six mois de progression en trois séances d'une heure par semaine, pour te remuscler et perdre le ventre quand le travail et la famille prennent tout le reste.",
+    desc: "Six mois de progression en trois séances d'une heure par semaine, pour te remuscler et travailler ta composition corporelle quand le travail et la famille prennent tout le reste.",
     points: [
       "24 semaines de séances écrites, 3 heures par semaine",
       "Versions salle et maison pour les semaines chargées",
-      "Livré dans l'app TB my Coach : 6 mois d'accès inclus",
+      "Livré dans l'app TB my Coach : 6 mois de Premium inclus",
       "Repères alimentaires simples, sans régime",
       "Déduit du coaching Charpente si tu passes au suivi dans les 30 jours"
     ],
     prix: "179\u00a0€",
-    prixBarre: "268\u00a0€",
-    note: "Paiement unique. Valeur : programme + 6 mois d'app (89 €). TVA non applicable, art. 293 B du CGI.",
+    note: "Paiement unique. Inclut 6 mois de TB my Coach Premium. TVA non applicable, art. 293 B du CGI.",
     bouton: "Acheter le cycle",
     stripe: "",
     stripeTest: "https://buy.stripe.com/test_4gMaEWaxhfWgcBLfvt7Vm08"
@@ -100,38 +98,41 @@ window.CATALOGUE = [
 
   /* ---------- NIVEAU 2 : L'APP EN AUTONOMIE ---------- */
   {
-    id: "app-autonomie",
+    id: "app-premium",
     famille: "app",
-    titre: "TB my Coach en autonomie",
-    pour: "Tu sais quoi faire, il te manque l'outil",
-    desc: "L'application que j'utilise avec mes clients, pour toi seul : tu crées ta routine, tu remplis ton carnet et tu suis ta transformation.",
+    titre: "TB my Coach Premium",
+    statut: "dispo",
+    phare: true,
+    pour: "Être ton propre coach, avec mes outils",
+    desc: "Tous les outils que j'utilise avec mes clients, sur ton propre programme : génération, surcharge progressive automatique, nutrition calculée.",
     points: [
-      "Carnet d'entraînement et historique de tes charges",
-      "Calculateurs de 1RM et de charges intégrés",
-      "Photos, mensurations et courbes de progression",
-      "Sans engagement, résiliable en un clic"
+      "Programme modifiable, régénérable, banque de programmes",
+      "Surcharge progressive automatique et vue par exercice",
+      "Plan alimentaire calculé avec tes plats, estimateur de repas",
+      "Sans engagement, résiliable depuis l'app"
     ],
-    prix: "14,90\u00a0€ / mois",
-    note: "Ou 119 € par an (2 mois offerts).",
-    options: [
-      { label: "S'abonner · 14,90 €/mois", stripe: "", stripeTest: "https://buy.stripe.com/test_14A8wO8p911m8lv6YX7Vm05" },
-      { label: "Annuel · 119 €/an", stripe: "", stripeTest: "https://buy.stripe.com/test_7sY00icFpaBW6dn2IH7Vm06" }
-    ]
+    prix: "9,99\u00a0€ / mois",
+    note: "Ou 59,99 € par an. 7 jours d'essai gratuit. TVA non applicable, art. 293 B du CGI.",
+    bouton: "Essayer 7 jours gratuitement",
+    lien: "https://thomasbouletcoaching-lab.github.io/tb-coaching-app/"
   },
   {
-    id: "essai-app",
+    id: "app-gratuit",
     famille: "app",
-    titre: "30 jours d'essai gratuit",
-    statut: "attente",
-    desc: "Teste l'app en autonomie pendant un mois. À la fin, tu continues seul, tu prends un cycle ou tu passes au suivi.",
+    titre: "TB my Coach Gratuit",
+    statut: "dispo",
+    pour: "Démarrer et prendre l'habitude",
+    desc: "Crée ton compte, réponds au questionnaire : ton programme de départ est généré, tu notes ta première séance dans la foulée.",
     points: [
-      "Accès complet pendant 30 jours",
+      "Programme de départ généré par ton questionnaire",
+      "Carnet d'entraînement, chronos, records",
+      "Poids, mensurations, journal alimentaire simple",
       "Sans carte bancaire"
     ],
     prix: "Gratuit",
     note: "",
-    bouton: "M'inscrire à l'essai",
-    lien: ""
+    bouton: "Créer mon compte",
+    lien: "https://thomasbouletcoaching-lab.github.io/tb-coaching-app/"
   },
 
   /* ---------- NIVEAU 1 : COMMENCER SEUL ---------- */
@@ -192,7 +193,7 @@ window.CATALOGUE = [
     famille: "ressources",
     titre: "Calculateur de force",
     statut: "dispo",
-    desc: "Ton 1RM estimé, tes charges à chaque RPE et le délai réaliste pour atteindre ton objectif.",
+    desc: "Ton 1RM estimé, tes charges à chaque RPE et une estimation indicative du délai pour ton objectif, qui dépend de ta régularité et de ta récupération.",
     prix: "Gratuit",
     note: "En ligne, sans inscription.",
     bouton: "Calculer mon 1RM",
@@ -214,7 +215,7 @@ window.CATALOGUE = [
     famille: "ressources",
     titre: "Guide « Être sec et musclé après 30 ans »",
     statut: "attente",
-    desc: "Ce qui change après 30 ans, et comment perdre le ventre sans perdre ta force ni ta vie sociale.",
+    desc: "Ce qui change après 30 ans, et comment travailler ta composition corporelle en gardant ta force et ta vie sociale.",
     prix: "Gratuit",
     note: "",
     bouton: "Être prévenu de sa sortie",
@@ -223,10 +224,10 @@ window.CATALOGUE = [
 ];
 
 window.FAMILLES = {
-  accompagnement: { niveau: "Niveau 4 · Le plus rapide", titre: "Être coaché", intro: "Je construis ton programme, je lis ton carnet et j'ajuste chaque semaine. Pour ceux qui veulent un résultat sans se tromper." },
-  cycles: { niveau: "Niveau 3 · Le plus complet en autonomie", titre: "Les cycles de 6 mois", intro: "Six mois de progression déjà écrits par moi, livrés dans l'app. Tu suis le plan, tu es ton propre coach." },
-  app: { niveau: "Niveau 2", titre: "L'app en autonomie", intro: "TB my Coach, l'application que j'ai construite pour mes clients, pour suivre toi-même tes séances et ta transformation." },
-  commencer: { niveau: "Niveau 1 · Pour démarrer", titre: "Commencer seul", intro: "Un programme de 8 semaines ou mes outils Google Sheets, à petit prix, pour tester ma méthode." },
+  app: { niveau: "Pour commencer", titre: "L'app TB my Coach", intro: "L'application que j'ai construite pour mes clients. Gratuite pour démarrer, Premium pour avoir tous mes outils sur ton propre programme." },
+  accompagnement: { niveau: "Être accompagné", titre: "Le coaching", intro: "Je construis ton programme, je lis ton carnet et j'ajuste. Dans la même app : ton historique te suit." },
+  cycles: { niveau: "Programmes à l'unité", titre: "Les cycles de 6 mois", intro: "Six mois de progression déjà écrits par moi, livrés dans l'app avec 6 mois de Premium." },
+  commencer: { titre: "Programmes et outils", intro: "Un programme de 8 semaines ou mes outils Google Sheets, à petit prix." },
   ressources: { titre: "Gratuit", intro: "Des outils et des guides pour avancer avec une méthode solide." }
 };
 
@@ -236,10 +237,7 @@ window.FAMILLES = {
            Exemples : "https://www.youtube.com/watch?v=XXXXXXXXXXX" ou "video/vsl.mp4"
 */
 window.SITE = {
-  vsl: "",
-  // Places au tarif fondateur : augmente "prises" de 1 à chaque client qui paie.
-  // Quand prises = total, ou après la date "fin", le site affiche automatiquement 1 600 €.
-  fondateur: { total: 10, prises: 0, fin: "2026-12-31T23:59:59+01:00" }
+  vsl: ""
 };
 
 /* RÉSULTATS CLIENTS

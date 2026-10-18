@@ -136,7 +136,7 @@
     etat.delai = d.semaines ? d.semaines + " semaines" : "très long";
     out.innerHTML = '<p class="calc-gros">' + (d.semaines ? "≈ " + d.semaines + " semaines" : "Plus de 2 ans") + "</p>" +
       "<p>Pour " + cible + ", il te faut un 1RM d'environ " + kg(vise - etat.pdc) + (etat.leste ? " de lest" : "") +
-      ", soit " + ecart + " % de plus qu'aujourd'hui. C'est le délai réaliste avec un programme structuré et des séances régulières ; sans plan, la plupart des pratiquants stagnent.</p>";
+      ", soit " + ecart + " % de plus qu'aujourd'hui. C'est une estimation indicative, en supposant un programme structuré et des séances régulières. Ton délai réel dépendra de ta récupération, de ton historique et de ta régularité.</p>";
     var c = !d.semaines || d.semaines > 24 ? CTA.long : d.semaines > 8 ? CTA.moyen : CTA.court;
     $("[data-cta-titre]", cta).textContent = c.titre;
     $("[data-cta-texte]", cta).textContent = c.texte;
