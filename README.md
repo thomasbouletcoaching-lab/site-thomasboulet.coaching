@@ -32,6 +32,14 @@ Candidatures, téléchargements du guide et inscriptions aux listes d'attente ar
 (`candidature`, `guide-3h`, `calculateur` ou `attente` + l'offre concernée).
 Les demandes `calculateur` contiennent aussi `mouvement`, `e1rm`, `objectif` et `delai` : réponds-leur à la main sous 48 h, c'est la promesse affichée.
 
+## Savoir quel contenu amène les demandes
+
+Ajoute `?src=` à tes liens vers le site : `…/coaching.html?src=reel-1rm`, `?src=bio`, `?src=story`, `?src=manychat`.
+Les liens UTM (`utm_source`, `utm_medium`, `utm_campaign`, `utm_content`) marchent aussi. La source est gardée le temps
+de la visite (sans cookie) et envoyée avec le formulaire rempli, dans `data.src` / `data.utm_*` (sinon `data.ref` = site d'origine).
+Dans l'app, espace coach → Business → Objectif : demandes et clients par source.
+Test : `tests/attribution-e2e.js`.
+
 ## Brancher le nom de domaine (thomasboulet-coaching.fr)
 
 1. Acheter le domaine (OVH, Gandi…).
