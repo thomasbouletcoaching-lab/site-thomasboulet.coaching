@@ -21,21 +21,39 @@ window.CATALOGUE = [
   {
     id: "cycle-12",
     famille: "accompagnement",
-    titre: "Le cycle Charpente, 12 semaines",
+    titre: "Coaching individuel, 12 semaines",
     statut: "dispo",
     phare: true,
-    desc: "L'accompagnement complet : un programme écrit pour toi, ton alimentation organisée autour de vrais plats, et un suivi chaque semaine dans l'app TB my Coach.",
+    desc: "Force et tour de taille en 12 semaines, environ 3 heures par semaine et sans régime : un programme écrit pour toi, ton alimentation organisée autour de vrais plats, et un bilan chaque semaine dans l'app TB my Coach.",
     points: [
       "Programme individualisé, ajusté chaque semaine selon ton carnet",
-      "Plan alimentaire sans régime, adapté à tes goûts",
-      "Bilan hebdomadaire commenté et messagerie avec moi",
+      "Plan alimentaire sans régime, avec tes plats",
+      "Bilan hebdomadaire commenté, messagerie et appels réservables",
       "Une séance offerte avec moi en salle à Paris",
-      "Le prix d'un cycle 6 mois acheté dans les 30 jours précédents est déduit"
+      "Concours : la meilleure transformation gagne 6 mois de suivi offerts",
+      "4 semaines offertes si l'objectif fixé ensemble n'est pas atteint (voir conditions)"
     ],
-    prix: "540\u00a0€ / mois",
-    note: "3 mensualités, soit 1 620 € au total. Sur candidature. TVA non applicable, art. 293 B du CGI.",
-    bouton: "Voir le cycle en détail",
+    prix: "790\u00a0€",
+    note: "Tarif fondateur au lieu de 1 600 €, pour 10 places ou jusqu'au 31/12/2026. Sur appel. TVA non applicable, art. 293 B du CGI.",
+    bouton: "Voir le coaching en détail",
     lien: "coaching.html"
+  },
+  {
+    id: "cycle-groupe",
+    famille: "accompagnement",
+    titre: "Cycle en groupe, 12 semaines",
+    statut: "attente",
+    pour: "Être guidé, à plusieurs, pour moins cher",
+    desc: "Le même cadre de 12 semaines, en petit groupe : programme par profil dans l'app, un live par semaine avec moi, et le groupe pour tenir. Première session en préparation.",
+    points: [
+      "Programme de 12 semaines selon ton profil, dans l'app",
+      "Un live de questions-réponses par semaine",
+      "Groupe privé des participants"
+    ],
+    prix: "",
+    note: "Inscris-toi sur la liste d'attente : tu seras prévenu en premier, avec le prix.",
+    bouton: "Être prévenu",
+    lien: ""
   },
   {
     id: "coaching-leger",
@@ -237,7 +255,12 @@ window.FAMILLES = {
            Exemples : "https://www.youtube.com/watch?v=XXXXXXXXXXX" ou "video/vsl.mp4"
 */
 window.SITE = {
-  vsl: ""
+  vsl: "",
+  /* Tarif fondateur : 790 € au lieu de 1 600 €, pour 10 places ou jusqu'au 31/12/2026 (au premier terme atteint).
+     - prises : nombre de places déjà vendues. Laisse null pour ne pas afficher de décompte ;
+       mets 0, 1, 2… pour afficher la jauge « X places restantes ». À 10, la page passe au prix normal.
+     - fin : après cette date, la page passe automatiquement au prix normal. */
+  fondateur: { total: 10, prises: null, fin: "2026-12-31T23:59:59+01:00" }
 };
 
 /* RÉSULTATS CLIENTS

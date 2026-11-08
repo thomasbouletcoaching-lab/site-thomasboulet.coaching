@@ -12,6 +12,24 @@
   function $$(s, r){ return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
   function esc(t){ return String(t).replace(/[&<>"']/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]; }); }
 
+  // Attribution : d'où vient la visite (?src=reel-1rm, utm_*, ou site d'origine).
+  // Gardée le temps de l'onglet (sessionStorage, pas de cookie), envoyée seulement avec un formulaire rempli.
+  var ATTR_CLE = "tb.attribution";
+  var ATTR_CHAMPS = ["src", "utm_source", "utm_medium", "utm_campaign", "utm_content"];
+  function nettoyer(v){ return String(v || "").toLowerCase().trim().replace(/[^a-z0-9._-]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 60); }
+  var attribution = (function(){
+    var memo = null;
+    try { memo = JSON.parse(sessionStorage.getItem(ATTR_CLE) || "null"); } catch (e) {}
+    var nouv = {}, params;
+    try { params = new URLSearchParams(location.search); } catch (e) { params = null; }
+    if (params) ATTR_CHAMPS.forEach(function(k){ var v = nettoyer(params.get(k)); if (v) nouv[k] = v; });
+    if (!Object.keys(nouv).length && !memo) {
+      try { var h = document.referrer ? new URL(document.referrer).hostname : ""; if (h && h !== location.hostname) nouv.ref = nettoyer(h.replace(/^(www|l|lm|m)\./, "")); } catch (e) {}
+    }
+    if (Object.keys(nouv).length) { nouv.arrivee = location.pathname.split("/").pop() || "index.html"; memo = nouv; try { sessionStorage.setItem(ATTR_CLE, JSON.stringify(memo)); } catch (e) {} }
+    return memo || {};
+  })();
+
   // Menu mobile
   var burger = $(".burger"), liens = $(".liens");
   if (burger && liens) {
@@ -97,34 +115,48 @@
       var champNom = f.elements.namedItem("name");
       if (champNom && champNom.required && name.length < 2) return dire(out, "ko", "Indique ton prénom.");
       if (!emailOk(v.email || "")) return dire(out, "ko", "Vérifie ton adresse e-mail.");
+      if (type === "appel" && !v.goal) return dire(out, "ko", "Choisis ton objectif principal.");
       if (type === "candidature") {
         if (!v.goal) return dire(out, "ko", "Choisis ton objectif principal.");
         if (!v.practice) return dire(out, "ko", "Décris en quelques mots ta pratique actuelle.");
       }
       if (f.elements.consent && !f.elements.consent.checked) return dire(out, "ko", "Coche la case d'accord pour que je puisse te répondre.");
       var data = { origine: "site", demande: type, page: location.pathname.split("/").pop() || "index.html" };
-      ["age","goal","practice","sessions","place","constraints","source","mouvement","e1rm","objectif","delai","offre"].forEach(function(k){ if (v[k]) data[k] = v[k]; });
+      ["age","goal","practice","sessions","place","constraints","source","mouvement","e1rm","objectif","delai","offre","frein"].forEach(function(k){ if (v[k]) data[k] = v[k]; });
+      Object.keys(attribution).forEach(function(k){ if (!data[k]) data[k] = attribution[k]; });
       if (btn) { btn.disabled = true; btn.textContent = "Envoi…"; }
       envoyer({ name: name || (v.email.split("@")[0]), email: v.email, phone: v.phone || null, data: data, consent: true })
         .then(function(){
           $$("input,select,textarea,button", f).forEach(function(x){ x.disabled = true; });
+          if (btn) btn.textContent = "Envoyé ✓";
           var prenom = esc((name || "").split(/\s+/)[0]);
           var msg = f.getAttribute("data-merci") || "C'est noté{p}. Je te tiens au courant par e-mail.";
           dire(out, "ok", msg.replace("{p}", prenom ? ", " + prenom : ""));
+          // Page d'appel : lien Calendly prérempli (prénom et e-mail) pour choisir le créneau
+          var cal = f.getAttribute("data-calendly");
+          if (cal) {
+            var u = cal + (cal.indexOf("?") < 0 ? "?" : "&") + "name=" + encodeURIComponent(name || "") + "&email=" + encodeURIComponent(v.email);
+            out.insertAdjacentHTML("beforeend", '<p style="margin-top:16px"><a class="btn btn-plein" data-creneau href="' + esc(u) + '" target="_blank" rel="noopener">Choisir mon créneau de 15 min</a></p>');
+          }
         })
         .catch(function(){ if (btn) { btn.disabled = false; btn.textContent = label; } dire(out, "ko", echec); });
     });
   });
 
-  // Places au tarif fondateur, réglées dans produits.js
+  // Places au tarif fondateur, réglées dans produits.js (SITE.fondateur).
+  // prises = nombre de places déjà vendues ; laisse null tant que tu ne veux pas afficher de décompte :
+  // la page dit alors « 10 places fondateur », sans jauge, pour ne jamais afficher un chiffre faux.
   var F = (window.SITE && window.SITE.fondateur) || { total: 0, prises: 0 };
-  var restantes = Math.max(0, (F.total || 0) - (F.prises || 0)), complet = restantes === 0 || (F.fin && Date.now() > Date.parse(F.fin));
+  var connu = typeof F.prises === "number";
+  var restantes = Math.max(0, (F.total || 0) - (connu ? F.prises : 0));
+  var complet = !F.total || (connu && restantes === 0) || (F.fin && Date.now() > Date.parse(F.fin));
   $$("[data-si-places]").forEach(function(el){ el.hidden = complet; });
   $$("[data-si-complet]").forEach(function(el){ el.hidden = !complet; });
   $$("[data-places-restantes]").forEach(function(el){ el.textContent = restantes; });
   $$("[data-places-total]").forEach(function(el){ el.textContent = F.total; });
-  $$("[data-places-mot]").forEach(function(el){ el.textContent = restantes > 1 ? "places fondateur restantes" : "place fondateur restante"; });
+  $$("[data-places-mot]").forEach(function(el){ el.textContent = connu ? (restantes > 1 ? "places fondateur restantes" : "place fondateur restante") : "places au tarif fondateur"; });
   $$("[data-places-jauge]").forEach(function(el){
+    if (!connu) { el.hidden = true; return; }
     var h = ""; for (var k = 0; k < F.total; k++) h += '<i class="' + (k < F.prises ? "prise" : "") + '"></i>';
     el.innerHTML = h;
   });

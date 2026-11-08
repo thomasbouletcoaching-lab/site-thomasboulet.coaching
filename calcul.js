@@ -114,8 +114,8 @@
   // Objectif
   var CTA = {
     court: { titre: "Le Programme Plateau, 8 semaines", texte: "Ton objectif est à portée : 8 semaines bien construites suffisent souvent.", lien: "offres.html#prog-plateau", bouton: "Voir le programme · 29 €" },
-    moyen: { titre: "Le Cycle Force, 24 semaines", texte: "C'est un objectif de plusieurs mois : il te faut une progression écrite à l'avance, pas des séances au feeling.", lien: "offres.html#cycle-force", bouton: "Voir le cycle · 179 €" },
-    long: { titre: "Le coaching Charpente", texte: "Objectif ambitieux : pour gagner du temps, il faut un programme ajusté chaque semaine à tes séances.", lien: "coaching.html", bouton: "Voir le coaching" }
+    moyen: { titre: "Le coaching individuel, 12 semaines", texte: "C'est un objectif de plusieurs mois : il te faut une progression écrite pour toi et ajustée chaque semaine, pas des séances au feeling. On en parle 15 minutes ?", lien: "appel.html", bouton: "Réserver mon appel de 15 min" },
+    long: { titre: "Le coaching individuel, 12 semaines", texte: "Objectif ambitieux : pour gagner du temps, il faut un programme ajusté chaque semaine à tes séances. On regarde ensemble par où commencer ?", lien: "appel.html", bouton: "Réserver mon appel de 15 min" }
   };
   function majObjectif(){
     var out = $("[data-objectif]"), cta = $("[data-objectif-cta]");
